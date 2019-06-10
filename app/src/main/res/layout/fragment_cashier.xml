@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="model"
+            type="com.cloudcreativity.cashiersystem.model.CashierModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dip"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:elevation="5dip"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_weight="1">
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="70dip"
+                android:text="查询"
+                android:theme="@style/GreenButton1"
+                android:textColor="@color/white"
+                android:onClick="@{()->model.onQueryClick()}"
+                android:textSize="20sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:onClick="@{()->model.onOpenClick()}"
+                android:orientation="vertical">
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:drawableTop="@mipmap/icon_cashier_openbill"
+                    android:textColor="@color/frame_active_green"
+                    android:drawablePadding="10dip"
+                    android:text="开单"/>
+            </LinearLayout>
+        </LinearLayout>
+        <fragment
+            android:layout_width="0dip"
+            android:layout_weight="2"
+            android:name="com.cloudcreativity.cashiersystem.fragments.cashier.GoodsFragment"
+            android:tag="goodsList"
+            android:layout_marginStart="10dip"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</layout>

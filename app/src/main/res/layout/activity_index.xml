@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_index_bg" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dip"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dip"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_phone"
+            android:layout_width="400dip"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_input_bottom_line_1dp_white"
+            android:hint="请输入手机号"
+            android:inputType="phone"
+            android:padding="20dip"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray_f1f1f1"
+            android:textSize="25sp" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_password"
+            android:layout_width="400dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/ic_input_bottom_line_1dp_white"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:padding="20dip"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray_f1f1f1"
+            android:textSize="25sp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="400dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:text="@string/str_login"
+            android:textSize="30sp"
+            android:theme="@style/GreenButton" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dip"
+        android:text="All Rights Reserved By CloudCreativity Tech."
+        android:textColor="@color/gray_f1f1f1"
+        android:textSize="25sp" />
+
+    <android.inputmethodservice.KeyboardView
+        android:id="@+id/keyboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:keyBackground="@color/colorPrimary"
+        android:keyTextColor="#333333"
+        android:paddingTop="1dp"
+        android:shadowColor="#FFFFFF"
+        android:shadowRadius="0.0" />
+</RelativeLayout>
