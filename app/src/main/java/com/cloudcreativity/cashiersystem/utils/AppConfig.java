@@ -31,10 +31,28 @@ public class AppConfig {
      */
     static String APP_HOT_UPDATE_FILE = "cashier_system_hot_update.apk";
 
+    /**
+     * 打印机的生产厂商ID
+     */
+    public static final int PRINTER_VENDOR_ID = 34918;
+
     public static  class FRAGMENT_NAMES{
         public static final String FRAGMENT_ORDER = "fragment_order";
         public static final String FRAGMENT_OPEN_ORDER = "fragment_open_order";
         public static final Object FRAGMENT_CASHIER = "fragment_cashier";
+        public static final String FRAGMENT_ORDER_DETAIL = "fragment_order_detail";
+        public static final String FRAGMENT_ORDER_LIST = "fragment_order_list";
+        public static final String FRAGMENT_MEMBER_LIST = "fragment_order_list";
+        public static final String FRAGMENT_MEMBER_DETAIL = "fragment_member_detail";
+        public static final String FRAGMENT_MEMBER_DETAIL_INDEX = "fragment_member_detail_index";
+        public static final String FRAGMENT_MEMBER_PAY = "fragment_member_pay";
+        public static final String FRAGMENT_MEMBER_BALANCE = "fragment_member_balance";
+        public static final String FRAGMENT_MEMBER_SCORE = "fragment_member_score";
+        public static final String FRAGMENT_MEMBER_EDIT = "fragment_member_edit";
+        public static final String FRAGMENT_PERSONAL_CHANGE_PWD = "fragment_personal_change_pwd";
+        public static final String FRAGMENT_PERSONAL_DEFAULT = "fragment_personal_default";
+        public static final String FRAGMENT_PERSONAL_CHANGE_MOBILE = "fragment_personal_change_mobile";
+        public static final String FRAGMENT_MESSAGE_LIST = "fragment_message_list";
     }
 
 }

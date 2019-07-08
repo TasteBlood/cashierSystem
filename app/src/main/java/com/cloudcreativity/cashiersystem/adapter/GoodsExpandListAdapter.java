@@ -28,7 +28,7 @@ public class GoodsExpandListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return entities.get(groupPosition).getChild().size();
+        return entities.get(groupPosition).getSeconds().size();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class GoodsExpandListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     @Override
@@ -68,13 +68,23 @@ public class GoodsExpandListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         convertView = new ChildHolder().getView(convertView);
         ChildHolder holder = (ChildHolder) convertView.getTag();
-        holder.tv_name.setText(entities.get(groupPosition).getChild().get(childPosition).getName());
+        holder.tv_name.setText(entities.get(groupPosition).getSeconds().get(childPosition).getName());
         return convertView;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    @Override
+    public long getCombinedChildId(long groupId, long childId) {
+        return 0;
+    }
+
+    @Override
+    public long getCombinedGroupId(long groupId) {
+        return 0;
     }
 
     public class GroupHolder{

@@ -8,7 +8,7 @@ import android.content.Context;
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private Thread.UncaughtExceptionHandler mDefaultHandler;
     // CrashHandler实例
-    private static CrashHandler INSTANCE = new CrashHandler();
+    private  static CrashHandler INSTANCE;
     // 程序的Context对象
     private Context mContext;
 
@@ -16,7 +16,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     public static CrashHandler getInstance() {
-        return INSTANCE;
+        return INSTANCE==null?INSTANCE = new CrashHandler():INSTANCE;
     }
 
     /**
@@ -46,7 +46,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     /**
      * 自定义错误捕获
-     *
      * @param ex
      * @return true:如果处理了该异常信息;否则返回false.
      */

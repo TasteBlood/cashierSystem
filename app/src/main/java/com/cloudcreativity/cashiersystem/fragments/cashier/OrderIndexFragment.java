@@ -12,11 +12,14 @@ import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.base.LazyFragment;
 import com.cloudcreativity.cashiersystem.databinding.FragmentOrderIndexBinding;
 import com.cloudcreativity.cashiersystem.model.OrderIndexModel;
+import com.cloudcreativity.cashiersystem.utils.AppConfig;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 public class OrderIndexFragment extends LazyFragment {
+
+    private OrderIndexModel indexModel;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +36,8 @@ public class OrderIndexFragment extends LazyFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentOrderIndexBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_index,container,false);
-        binding.setModel(new OrderIndexModel(context,binding));
+        binding.setModel(indexModel = new OrderIndexModel(context,binding));
+        binding.getRoot().setClickable(true);
         return binding.getRoot();
     }
 
@@ -44,6 +48,12 @@ public class OrderIndexFragment extends LazyFragment {
 
     @Subscribe
     public void onEvent(String name){
-
+        if(AppConfig.FRAGMENT_NAMES.FRAGMENT_ORDER_LIST.equals(name)){
+            //展示列表
+            indexModel.onDefault();
+        }else if(AppConfig.FRAGMENT_NAMES.FRAGMENT_ORDER_DETAIL.equals(name)){
+            //展示详情
+            indexModel.onDetail();
+        }
     }
 }

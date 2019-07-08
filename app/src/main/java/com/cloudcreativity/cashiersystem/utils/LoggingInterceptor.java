@@ -33,11 +33,12 @@ public class LoggingInterceptor implements Interceptor {
                 }
                 if(!request.url().toString().contains("login")){
                     builder.addEncoded("token",SPUtils.get().getToken())
-                            .addEncoded("wid", String.valueOf(SPUtils.get().getUid()))
-                            .addEncoded("idCardNumber",SPUtils.get().getString(SPUtils.Config.IDCARD,""));
+                            .addEncoded("shopId",SPUtils.get().getShopId())
+                            .addEncoded("uid", SPUtils.get().getUid());
                     sb.append("token" + "=" + SPUtils.get().getToken() + ",");
-                    sb.append("wid" + "=" + SPUtils.get().getUid() + ",");
-                    sb.append("idCardNumber" + "=" + SPUtils.get().getString(SPUtils.Config.IDCARD,"") + ",");
+                    sb.append("uid" + "=" + SPUtils.get().getUid() + ",");
+                    sb.append("shopId" + "=" + SPUtils.get().getShopId() + ",");
+                    //sb.append("idCardNumber" + "=" + SPUtils.get().getString(SPUtils.Config.IDCARD,"") + ",");
                 }
 
                 body = builder.build();
@@ -50,8 +51,9 @@ public class LoggingInterceptor implements Interceptor {
             if(!request.url().toString().contains("login")&&!request.url().toString().contains("addFace")){
                 HttpUrl httpUrl = request.url().newBuilder()
                         .addQueryParameter("token", SPUtils.get().getToken())
-                        .addQueryParameter("wid", String.valueOf(SPUtils.get().getUid()))
-                        .addQueryParameter("idCardNumber",SPUtils.get().getString(SPUtils.Config.IDCARD,""))
+                        .addQueryParameter("uid", SPUtils.get().getUid())
+                        .addQueryParameter("shopId", SPUtils.get().getShopId())
+                        //.addQueryParameter("idCardNumber",SPUtils.get().getString(SPUtils.Config.IDCARD,""))
                         .build();
                 request = request.newBuilder().url(httpUrl).build();
             }else{

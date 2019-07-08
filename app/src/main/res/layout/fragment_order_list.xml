@@ -30,6 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dip"
                     android:textStyle="bold"
+                    android:textSize="25sp"
                     android:textColor="@color/frame_gray_343"
                     android:text="订单查询"/>
             </LinearLayout>
@@ -57,29 +58,30 @@
                     android:textColor="@color/frame_gray_343"
                     android:text="支付方式:"/>
                 <RadioGroup
+                    android:id="@+id/rg_payWay"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:layout_marginStart="10dip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <RadioButton
+                        android:id="@+id/rb_cash"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dip"
                         android:button="@null"
-                        android:textSize="12sp"
                         android:paddingStart="13dip"
                         android:paddingEnd="13dip"
                         android:paddingTop="3dip"
                         android:paddingBottom="3dip"
-                        android:checked="true"
                         android:textColor="@color/frame_gray_343"
                         android:background="@drawable/selector_query_bg"
+                        android:onClick="@{(v)->model.onOptionClick1(v)}"
                         android:text="现金"/>
                     <RadioButton
+                        android:id="@+id/rb_phone"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dip"
                         android:button="@null"
-                        android:textSize="12sp"
                         android:layout_marginStart="10dip"
                         android:paddingStart="13dip"
                         android:paddingEnd="13dip"
@@ -87,6 +89,7 @@
                         android:paddingBottom="3dip"
                         android:textColor="@color/frame_gray_343"
                         android:background="@drawable/selector_query_bg"
+                        android:onClick="@{(v)->model.onOptionClick1(v)}"
                         android:text="手机"/>
                 </RadioGroup>
                 <android.support.v7.widget.AppCompatTextView
@@ -96,29 +99,30 @@
                     android:textColor="@color/frame_gray_343"
                     android:text="结算状态:"/>
                 <RadioGroup
+                    android:id="@+id/rg_state"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:layout_marginStart="10dip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <RadioButton
+                        android:id="@+id/rb_payed"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dip"
                         android:button="@null"
-                        android:textSize="12sp"
                         android:paddingStart="13dip"
                         android:paddingEnd="13dip"
                         android:paddingTop="3dip"
                         android:paddingBottom="3dip"
-                        android:checked="true"
                         android:textColor="@color/frame_gray_343"
                         android:background="@drawable/selector_query_bg"
+                        android:onClick="@{(v)->model.onOptionClick2(v)}"
                         android:text="已结算"/>
                     <RadioButton
+                        android:id="@+id/rb_unpay"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dip"
                         android:button="@null"
-                        android:textSize="12sp"
                         android:layout_marginStart="10dip"
                         android:paddingStart="13dip"
                         android:paddingEnd="13dip"
@@ -126,6 +130,7 @@
                         android:paddingBottom="3dip"
                         android:textColor="@color/frame_gray_343"
                         android:background="@drawable/selector_query_bg"
+                        android:onClick="@{(v)->model.onOptionClick2(v)}"
                         android:text="未结算"/>
                 </RadioGroup>
                 <android.support.v7.widget.AppCompatTextView
@@ -135,29 +140,30 @@
                     android:textColor="@color/frame_gray_343"
                     android:text="会员身份:"/>
                 <RadioGroup
+                    android:id="@+id/rg_identity"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:layout_marginStart="10dip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <RadioButton
+                        android:id="@+id/rb_family"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dip"
                         android:button="@null"
-                        android:textSize="12sp"
                         android:paddingStart="13dip"
                         android:paddingEnd="13dip"
                         android:paddingTop="3dip"
                         android:paddingBottom="3dip"
-                        android:checked="true"
                         android:textColor="@color/frame_gray_343"
                         android:background="@drawable/selector_query_bg"
+                        android:onClick="@{(v)->model.onOptionClick3(v)}"
                         android:text="家庭会员"/>
                     <RadioButton
+                        android:id="@+id/rb_vip"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dip"
                         android:button="@null"
-                        android:textSize="12sp"
                         android:layout_marginStart="10dip"
                         android:paddingStart="13dip"
                         android:paddingEnd="13dip"
@@ -165,6 +171,7 @@
                         android:paddingBottom="3dip"
                         android:textColor="@color/frame_gray_343"
                         android:background="@drawable/selector_query_bg"
+                        android:onClick="@{(v)->model.onOptionClick3(v)}"
                         android:text="VIP会员"/>
                 </RadioGroup>
                 <android.support.v7.widget.AppCompatTextView
@@ -174,29 +181,30 @@
                     android:textColor="@color/frame_gray_343"
                     android:text="退货状态:"/>
                 <RadioGroup
+                    android:id="@+id/rg_back"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:layout_marginStart="10dip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <RadioButton
+                        android:id="@+id/rb_no"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dip"
                         android:button="@null"
-                        android:textSize="12sp"
                         android:paddingStart="13dip"
                         android:paddingEnd="13dip"
                         android:paddingTop="3dip"
                         android:paddingBottom="3dip"
-                        android:checked="true"
                         android:textColor="@color/frame_gray_343"
                         android:background="@drawable/selector_query_bg"
+                        android:onClick="@{(v)->model.onOptionClick4(v)}"
                         android:text="无"/>
                     <RadioButton
+                        android:id="@+id/rb_yes"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dip"
                         android:button="@null"
-                        android:textSize="12sp"
                         android:layout_marginStart="10dip"
                         android:paddingStart="13dip"
                         android:paddingEnd="13dip"
@@ -204,6 +212,7 @@
                         android:paddingBottom="3dip"
                         android:textColor="@color/frame_gray_343"
                         android:background="@drawable/selector_query_bg"
+                        android:onClick="@{(v)->model.onOptionClick4(v)}"
                         android:text="有"/>
                 </RadioGroup>
             </LinearLayout>
@@ -211,16 +220,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_marginTop="10dip"
+                android:layout_marginTop="15dip"
                 android:orientation="horizontal">
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/frame_gray_343"
-                    android:text="       时间:"/>
+                    android:text="    时间:"/>
                 <RadioButton
-                    android:layout_width="110dip"
-                    android:layout_height="wrap_content"
+                    android:layout_width="185dip"
+                    android:layout_height="40dip"
                     android:layout_marginStart="10dip"
                     android:paddingStart="13dip"
                     android:paddingEnd="13dip"
@@ -231,33 +240,34 @@
                     android:textColor="@color/frame_gray_343"
                     android:background="@drawable/selector_query_bg"
                     android:drawableEnd="@mipmap/icon_select_calendar"
-                    android:textSize="12sp"
-                    android:text="2019-12-23"
+                    android:onClick="@{()->model.onTimeClick()}"
+                    android:text="@{model.selectDate}"
                     android:hint="请选择时间"/>
                 <RadioGroup
+                    android:id="@+id/rg_time"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:layout_marginStart="20dip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <RadioButton
+                        android:id="@+id/rb_am"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dip"
                         android:button="@null"
-                        android:textSize="12sp"
                         android:paddingStart="13dip"
                         android:paddingEnd="13dip"
                         android:paddingTop="3dip"
                         android:paddingBottom="3dip"
-                        android:checked="true"
                         android:textColor="@color/frame_gray_343"
                         android:background="@drawable/selector_query_bg"
+                        android:onClick="@{(v)->model.onOptionClick5(v)}"
                         android:text="上午"/>
                     <RadioButton
+                        android:id="@+id/id_pm"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dip"
                         android:button="@null"
-                        android:textSize="12sp"
                         android:layout_marginStart="10dip"
                         android:paddingStart="13dip"
                         android:paddingEnd="13dip"
@@ -265,32 +275,36 @@
                         android:paddingBottom="3dip"
                         android:textColor="@color/frame_gray_343"
                         android:background="@drawable/selector_query_bg"
+                        android:onClick="@{(v)->model.onOptionClick5(v)}"
                         android:text="下午"/>
                 </RadioGroup>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:layout_marginTop="10dip"
+                android:layout_marginTop="15dip"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <android.support.v7.widget.AppCompatEditText
-                    android:textSize="12sp"
                     android:hint="请输入关键词/订单号进行查询"
                     android:drawableEnd="@mipmap/icon_search"
                     android:background="@drawable/shape_input_yellow_bg"
-                    android:padding="5dip"
+                    android:padding="10dip"
                     android:textColorHint="@color/frame_gray_343"
-                    android:layout_width="335dip"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="433dip"
+                    android:layout_height="50dip" />
                 <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="25dip"
+                    android:layout_height="wrap_content"
                     android:button="@null"
+                    android:textSize="18sp"
                     android:layout_marginStart="20dip"
+                    android:layout_marginTop="5dip"
+                    android:layout_marginEnd="5dip"
+                    android:layout_marginBottom="5dip"
                     android:textColorHint="@color/frame_gray_343"
                     android:background="@drawable/selector_yellow_btn"
-                    android:textSize="12sp"
+                    android:onClick="@{()->model.onSearchClick()}"
                     android:text="搜索"/>
             </LinearLayout>
         </LinearLayout>

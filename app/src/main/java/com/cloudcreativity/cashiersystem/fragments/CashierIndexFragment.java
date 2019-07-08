@@ -40,6 +40,7 @@ public class CashierIndexFragment extends LazyFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentCashierIndexBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cashier_index,container,false);
         binding.setModel(indexModel = new CashierIndexModel(context,binding));
+        binding.getRoot().setClickable(true);
         return binding.getRoot();
     }
 

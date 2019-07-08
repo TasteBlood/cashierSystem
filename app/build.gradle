@@ -4,21 +4,38 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.cloudcreativity.cashiersystem"
-        minSdkVersion 23
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        sourceSets{
+            main {
+                jni.srcDirs = []
+            }
+        }
     }
 
     dataBinding {
         enabled = true
+    }
+
+    sourceSets{
+        main {
+            jniLibs.srcDirs=['libs']
+        }
     }
 }
 

@@ -16,6 +16,8 @@ import com.cloudcreativity.cashiersystem.utils.LogUtils;
 
 public class CashierFragment extends LazyFragment {
 
+    private CashierModel cashierModel;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +34,14 @@ public class CashierFragment extends LazyFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentCashierBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cashier,container,false);
-        binding.setModel(new CashierModel());
+        cashierModel = new CashierModel(context, binding);
+        binding.setModel(cashierModel);
+        cashierModel.initialize();
+        binding.getRoot().setClickable(true);
         return binding.getRoot();
     }
 
     @Override
     public void initialLoadData() {
-
     }
 }

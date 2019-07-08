@@ -23,7 +23,8 @@ public class GoodsFragment extends LazyFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentGoodsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_goods,container,false);
-        binding.setModel(new GoodsFragmentModel(context,binding));
+        binding.setModel(new GoodsFragmentModel(context,binding,this));
+        binding.getRoot().setClickable(true);
         return binding.getRoot();
     }
 

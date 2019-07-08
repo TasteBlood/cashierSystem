@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
+import com.cloudcreativity.cashiersystem.activity.IndexActivity;
 import com.cloudcreativity.cashiersystem.base.BaseApp;
 import com.cloudcreativity.cashiersystem.utils.SPUtils;
 
@@ -32,17 +33,17 @@ public class MyBusinessReceiver extends BroadcastReceiver {
             //首先清空所有的用户数据
             SPUtils spUtils = SPUtils.get();
             spUtils.putBoolean(SPUtils.Config.IS_LOGIN,false);
-            spUtils.putInt(SPUtils.Config.UID,0);
+            spUtils.putString(SPUtils.Config.UID,"");
             spUtils.putString(SPUtils.Config.TOKEN,null);
             spUtils.putString(SPUtils.Config.USER,"{}");
-            spUtils.putString(SPUtils.Config.IDCARD,null);
+            spUtils.putString(SPUtils.Config.SHOP_ID,"");
             //这一步是关闭程序
             BaseApp.app.destroyActivity();
 
             //说明就是重新登录的操作
-//            Intent newIntent = new Intent(context, LoginActivity.class);
-//            newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            context.startActivity(newIntent);
+            Intent newIntent = new Intent(context, IndexActivity.class);
+            newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(newIntent);
         }else if(ACTION_EXIT_APP.equals(intent.getAction())){
             //说明就是关闭应用的操作
             BaseApp.app.onTerminate();
@@ -51,14 +52,16 @@ public class MyBusinessReceiver extends BroadcastReceiver {
             //首先清空所有的用户数据
             SPUtils spUtils = SPUtils.get();
             spUtils.putBoolean(SPUtils.Config.IS_LOGIN,false);
-            spUtils.putInt(SPUtils.Config.UID,0);
+            spUtils.putString(SPUtils.Config.UID,"");
             spUtils.putString(SPUtils.Config.TOKEN,null);
             spUtils.putString(SPUtils.Config.USER,"{}");
-            spUtils.putString(SPUtils.Config.IDCARD,null);
+            spUtils.putString(SPUtils.Config.SHOP_ID,"");
+
             BaseApp.app.destroyActivity();
-//            Intent newIntent = new Intent(context, LoginActivity.class);
-//            newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            context.startActivity(newIntent);
+
+            Intent newIntent = new Intent(context, IndexActivity.class);
+            newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(newIntent);
         }
     }
 }

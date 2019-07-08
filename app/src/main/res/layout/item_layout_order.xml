@@ -7,14 +7,14 @@
     </data>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dip"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1.4"
             android:gravity="center"
-            android:textSize="12sp"
             android:padding="10dip"
             android:text="@{item.id}"/>
         <android.support.v7.widget.AppCompatTextView
@@ -22,7 +22,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:gravity="center"
-            android:textSize="12sp"
             android:padding="10dip"
             android:text="@{String.valueOf(item.money)}"/>
         <android.support.v7.widget.AppCompatTextView
@@ -30,7 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="center"
-            android:textSize="12sp"
             android:padding="10dip"
             android:text="@{item.state==0?@string/state_paied:@string/state_unpaied}"/>
         <android.support.v7.widget.AppCompatTextView
@@ -39,14 +37,12 @@
             android:layout_weight="0.8"
             android:gravity="center"
             android:padding="10dip"
-            android:textSize="12sp"
             android:text="@{item.formatWay()}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1.2"
             android:gravity="center"
-            android:textSize="12sp"
             android:padding="10dip"
             android:text="@{item.createTime}"/>
         <FrameLayout
@@ -54,9 +50,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <Button
+                android:id="@+id/btn_detail"
                 android:layout_width="wrap_content"
-                android:layout_height="25dip"
-                android:textSize="12sp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:background="@drawable/selector_yellow_btn"
                 android:layout_gravity="center"
                 android:button="@null"

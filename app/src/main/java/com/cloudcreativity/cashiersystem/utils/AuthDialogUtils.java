@@ -30,6 +30,7 @@ public class AuthDialogUtils {
         Window window = dialog.getWindow();
         assert window != null;
         window.setGravity(Gravity.CENTER);
+        window.getAttributes().width = context.getResources().getDisplayMetrics().widthPixels/3;
         dialog.show();
     }
 
@@ -46,7 +47,7 @@ public class AuthDialogUtils {
         //重新登录
         dialog.dismiss();
         dialog = null;
-        Intent intent = new Intent(MyBusinessReceiver.ACTION_RE_LOGIN);
+        Intent intent = new Intent(MyBusinessReceiver.ACTION_LOGOUT);
         view.getContext().sendBroadcast(intent);
     }
 }

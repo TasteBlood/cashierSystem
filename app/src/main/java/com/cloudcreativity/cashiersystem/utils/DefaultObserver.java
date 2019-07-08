@@ -3,6 +3,7 @@ package com.cloudcreativity.cashiersystem.utils;
 import android.text.TextUtils;
 
 import com.cloudcreativity.cashiersystem.base.BaseDialogImpl;
+import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
 import org.json.JSONException;
@@ -64,9 +65,9 @@ public abstract class DefaultObserver<T> implements Observer<T> {
                 JSONObject object = new JSONObject((String)t);
                 if(object.getInt("status")==1){
                     //成功
-                    if(TextUtils.isEmpty(object.getString("info"))){
+                    if(TextUtils.isEmpty(object.getString("info"))||object.isNull("info")){
                         //说明当前的字符串是空的,模拟出空的json串
-                        onSuccess("{}");
+                        onSuccess("");
                     }else{
                         try{
                             JSONObject info = object.getJSONObject("info");
@@ -76,7 +77,7 @@ public abstract class DefaultObserver<T> implements Observer<T> {
                             onSuccess(object.getString("info"));
                         }
                     }
-                }else if(object.getInt("status")==100){
+                }else if(object.getInt("status")==2){
                     //用户权限出问题,账号在别处登录
                     //先清空用户数据
                     SPUtils.get().putBoolean(SPUtils.Config.IS_LOGIN,false);

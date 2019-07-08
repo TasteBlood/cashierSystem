@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.base.LazyFragment;
 import com.cloudcreativity.cashiersystem.databinding.FragmentOrderDetailBinding;
+import com.cloudcreativity.cashiersystem.model.OrderDetailModel;
 
 /**
  * 订单详情
@@ -21,6 +22,8 @@ public class OrderDetailFragment extends LazyFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentOrderDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_detail,container,false);
+        binding.setModel(new OrderDetailModel(context,binding));
+        binding.getRoot().setClickable(true);
         return binding.getRoot();
     }
 

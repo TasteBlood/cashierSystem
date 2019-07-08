@@ -3,87 +3,90 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#FED981"
     android:orientation="vertical">
-
     <android.support.v7.widget.AppCompatImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_index_bg" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dip"
-        android:text="@string/app_name"
-        android:textColor="@color/white"
-        android:textSize="40sp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="800dip"
+        android:layout_height="800dip"
         android:layout_centerInParent="true"
-        android:layout_marginTop="20dip"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_phone"
-            android:layout_width="400dip"
+        android:src="@mipmap/img_signin_bg"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_input_bottom_line_1dp_white"
-            android:hint="请输入手机号"
-            android:inputType="phone"
-            android:padding="20dip"
-            android:textColor="@color/white"
-            android:textColorHint="@color/gray_f1f1f1"
-            android:textSize="25sp" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_password"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="270dip"
+            android:paddingStart="35dip"
+            android:orientation="vertical">
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:drawableStart="@mipmap/icon_signin_userid"
+                android:inputType="phone"
+                android:gravity="center_vertical"
+                android:drawablePadding="5dip"
+                android:maxLines="1"
+                android:textSize="25sp"
+                android:hint="请输入手机号"
+                android:background="@drawable/shape_input_yellow_bg_line"/>
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dip"
+                android:gravity="center_vertical"
+                android:drawablePadding="10dip"
+                android:drawableStart="@mipmap/icon_signin_password"
+                android:maxLines="1"
+                android:padding="5dip"
+                android:hint="请输入密码"
+                android:textSize="25sp"
+                android:inputType="textPassword"
+                android:background="@drawable/shape_input_yellow_bg_line"/>
+            <TextView
+                android:id="@+id/tv_forget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:padding="5dip"
+                android:layout_gravity="end"
+                android:text="忘记密码"/>
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_login"
+                android:elevation="3dip"
+                android:layout_width="300dip"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dip"
+                android:layout_marginStart="5dip"
+                android:layout_marginEnd="5dip"
+                android:layout_marginBottom="5dip"
+                android:textSize="25sp"
+                android:background="@drawable/selector_yellow_btn"
+                android:text="登录"/>
+        </LinearLayout>
+        <FrameLayout
+            android:visibility="gone"
             android:layout_width="400dip"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:background="@drawable/ic_input_bottom_line_1dp_white"
-            android:hint="请输入密码"
-            android:inputType="textPassword"
-            android:padding="20dip"
-            android:textColor="@color/white"
-            android:textColorHint="@color/gray_f1f1f1"
-            android:textSize="25sp" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="400dip"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:text="@string/str_login"
-            android:textSize="30sp"
-            android:theme="@style/GreenButton" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dip"
-        android:text="All Rights Reserved By CloudCreativity Tech."
-        android:textColor="@color/gray_f1f1f1"
-        android:textSize="25sp" />
-
-    <android.inputmethodservice.KeyboardView
-        android:id="@+id/keyboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:background="@color/white"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:keyBackground="@color/colorPrimary"
-        android:keyTextColor="#333333"
-        android:paddingTop="1dp"
-        android:shadowColor="#FFFFFF"
-        android:shadowRadius="0.0" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="440dip"
+            android:paddingStart="40dip"
+            android:paddingEnd="-50dip"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:text="蔬哥果妹"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:text="收银系统"/>
+        </FrameLayout>
+    </RelativeLayout>
 </RelativeLayout>

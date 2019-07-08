@@ -11,12 +11,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 
 import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.databinding.LayoutProgressDialogBinding;
@@ -35,22 +37,23 @@ import io.reactivex.disposables.Disposable;
 /**
  * 这是Activity的基类，将retrofit的生命周期绑定在活动的生命周期上面
  */
-public abstract class BaseActivity extends AppCompatActivity implements BaseDialogImpl{
+public abstract class BaseActivity extends AppCompatActivity implements BaseDialogImpl {
     private CompositeDisposable disposableDestroy;
     private Dialog progressDialog;
 
     public static final int TAKE_PHOTO = 1;//启动相机标识
     public static final int SELECT_PHOTO = 2;//启动相册标识
-    public static final int CROP_REQUEST =3;//启动裁剪
+    public static final int CROP_REQUEST = 3;//启动裁剪
     private File tempFile;//这是临时文件
 
     //是否裁剪
     private boolean isCrop = true;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BaseApp.app.addActivity(this);
-        if(disposableDestroy!=null){
+        if (disposableDestroy != null) {
             throw new IllegalStateException("onCreate called multiple times");
         }
         disposableDestroy = new CompositeDisposable();
@@ -63,7 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
         ToastUtils.cancelToast();
 
         //销毁对话框，防止内存泄漏
-        if(progressDialog!=null){
+        if (progressDialog != null) {
             dismissProgress();
         }
 
@@ -77,7 +80,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
 
     @Override
     public boolean addRxDestroy(Disposable disposable) {
-        if(disposable==null){
+        if (disposable == null) {
             throw new IllegalStateException("AddUtilDestroy should be called between onCreate and onDestroy");
         }
         disposableDestroy.add(disposable);
@@ -86,24 +89,23 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
 
     @Override
     public void remove(Disposable disposable) {
-        if(disposableDestroy!=null){
+        if (disposableDestroy != null) {
             disposableDestroy.remove(disposable);
         }
     }
 
     /**
-     *
      * @param msg 显示加载框
      */
     @Override
     public void showProgress(String msg) {
         dialogMessage.set(msg);
-        if(progressDialog!=null&&!progressDialog.isShowing()){
+        if (progressDialog != null && !progressDialog.isShowing()) {
             progressDialog.show();
             return;
         }
         progressDialog = new Dialog(this, R.style.myProgressDialogStyle);
-        LayoutProgressDialogBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this),R.layout.layout_progress_dialog,null,false);
+        LayoutProgressDialogBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.layout_progress_dialog, null, false);
         binding.setDialog(this);
         progressDialog.setContentView(binding.getRoot());
         progressDialog.setCanceledOnTouchOutside(false);
@@ -121,7 +123,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
      */
     @Override
     public void dismissProgress() {
-        if(progressDialog!=null&&progressDialog.isShowing())
+        if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
         progressDialog = null;
     }
@@ -146,18 +148,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
                 .setItems(new String[]{"拍照", "相册"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                            if(which==0){
-                                openCamera();
-                            }else if(which==1){
-                                openGallery();
-                            }
+                        if (which == 0) {
+                            openCamera();
+                        } else if (which == 1) {
+                            openGallery();
+                        }
                     }
                 }).setCancelable(true).create();
         dialog.show();
     }
 
     //这是相机操作
-    private void openCamera(){
+    private void openCamera() {
         //用于保存调用相机拍照后所生成的文件
         tempFile = new File(Environment.getExternalStorageDirectory().getPath(), System.currentTimeMillis() + ".jpg");
         //跳转到调用系统相机
@@ -165,7 +167,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
         //判断版本
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {   //如果在Android7.0以上,使用FileProvider获取Uri
             intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(this, getApplicationInfo().packageName+".provider", tempFile);
+            Uri contentUri = FileProvider.getUriForFile(this, getApplicationInfo().packageName + ".provider", tempFile);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
         } else {    //否则使用Uri.fromFile(file)方法获取Uri
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
@@ -174,7 +176,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
     }
 
     //这是相册操作
-    private void openGallery(){
+    private void openGallery() {
         //用于保存
         tempFile = new File(Environment.getExternalStorageDirectory().getPath(), System.currentTimeMillis() + ".jpg");
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -185,22 +187,22 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_CANCELED)
+        if (resultCode == RESULT_CANCELED)
             return;
-        if(requestCode==TAKE_PHOTO){
+        if (requestCode == TAKE_PHOTO) {
             //用相机返回的照片去调用剪裁也需要对Uri进行处理
-            if(isCrop){
+            if (isCrop) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    Uri contentUri = FileProvider.getUriForFile(this, getApplicationInfo().packageName+".provider", tempFile);
+                    Uri contentUri = FileProvider.getUriForFile(this, getApplicationInfo().packageName + ".provider", tempFile);
                     cropPhoto(contentUri);
                 } else {
                     cropPhoto(Uri.fromFile(tempFile));
                 }
-            }else{
+            } else {
                 //进行图片处理直接返回path
                 try {
                     Bitmap bitmap = BitmapFactory.decodeFile(tempFile.getAbsolutePath());
-                    bitmap.compress(Bitmap.CompressFormat.JPEG,90,new FileOutputStream(tempFile));
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, new FileOutputStream(tempFile));
                     bitmap.recycle();
                     //回掉地址
                     onPhotoSuccess(tempFile.getAbsolutePath());
@@ -208,18 +210,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
                     e.printStackTrace();
                 }
             }
-        }else if(requestCode==SELECT_PHOTO){
+        } else if (requestCode == SELECT_PHOTO) {
             Uri uri = data.getData();
-            if(uri==null)
+            if (uri == null)
                 return;
-            if(isCrop){
+            if (isCrop) {
                 cropPhoto(uri);
-            }else{
+            } else {
                 //好像是android多媒体数据库的封装接口，具体的看Android文档
-                if("file".equals(uri.getScheme())&&data.getType().contains("image")){
+                if ("file".equals(uri.getScheme()) && data.getType().contains("image")) {
                     //处理特殊情况
                     onPhotoSuccess(uri.getPath());
-                }else{
+                } else {
                     //获取图片的路径：
                     String[] proj = {MediaStore.Images.Media.DATA};
                     Cursor cursor = managedQuery(uri, proj, null, null, null);
@@ -233,18 +235,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
                     onPhotoSuccess(path);
                 }
             }
-        }else if(requestCode==CROP_REQUEST){
+        } else if (requestCode == CROP_REQUEST) {
             //这是最终结果
             Bundle bundle = data.getExtras();
             if (bundle != null) {
                 //在这里获得了剪裁后的Bitmap对象，可以用于上传
                 Bitmap image = bundle.getParcelable("data");
-                if(image==null)
+                if (image == null)
                     return;
                 //设置到ImageView上
                 try {
                     FileOutputStream stream = new FileOutputStream(tempFile);
-                    image.compress(Bitmap.CompressFormat.JPEG,90,new FileOutputStream(tempFile));
+                    image.compress(Bitmap.CompressFormat.JPEG, 90, new FileOutputStream(tempFile));
                     stream.close();
                     //回掉地址
                     onPhotoSuccess(tempFile.getAbsolutePath());
@@ -256,9 +258,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
             }
         }
     }
+
     //图片处理成功的回掉
-    protected void onPhotoSuccess(String filePath){
-        LogUtils.e(getClass().getName(),filePath);}
+    protected void onPhotoSuccess(String filePath) {
+        LogUtils.e(getClass().getName(), filePath);
+    }
+
     /**
      * 裁剪图片
      */
@@ -275,13 +280,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
         intent.putExtra("return-data", true);
         startActivityForResult(intent, CROP_REQUEST);
     }
+
     /**
-     *
      * @param message 消息
      *                显示错误的网络请求消息
      */
     @Override
     public void showRequestErrorMessage(String message) {
-        ToastUtils.showShortToast(this,message);
+        ToastUtils.showShortToast(this, message);
     }
 }

@@ -23,6 +23,7 @@ public class OrderListFragment extends LazyFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentOrderListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_list,container,false);
         binding.setModel(new OrderListModel(context,binding,this));
+        binding.getRoot().setClickable(true);
         return binding.getRoot();
     }
 

@@ -7,7 +7,8 @@
     </data>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dip"
+        android:gravity="center_vertical"
         android:padding="10dip"
         android:orientation="horizontal">
         <android.support.v7.widget.AppCompatTextView
@@ -16,55 +17,48 @@
             android:layout_weight="1.2"
             android:gravity="center"
             android:textColor="@color/frame_gray_343"
-            android:textSize="13sp"
-            android:text="@{item.name}"/>
+            android:text="@{item.goodsDomain.name}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="13sp"
             android:textColor="@color/frame_gray_343"
-            android:text="@{String.valueOf(item.id)}"/>
+            android:text="@{String.valueOf(item.goodsId)}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="13sp"
             android:textColor="@color/frame_gray_343"
-            android:text="@{item.size}"/>
+            android:text="@{item.goodsDomain.standards}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="center"
-            android:textSize="13sp"
             android:textColor="@color/frame_gray_343"
-            android:text="@{item.unit}"/>
+            android:text="@{item.goodsDomain.unit}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="13sp"
             android:textColor="@color/frame_gray_343"
-            android:text="@{String.valueOf(item.price)}"/>
+            android:text="@{String.valueOf(item.goodsDomain.formatPrice())}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="13sp"
             android:textColor="@color/frame_gray_343"
-            android:text="@{String.valueOf(item.stock)}"/>
+            android:text="@{String.valueOf(item.computerStock)}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="12sp"
             android:textColor="@color/frame_gray_343"
-            android:text="@{item.tags}"/>
+            android:text="@{item.goodsDomain.tab}"/>
     </LinearLayout>
 </layout>

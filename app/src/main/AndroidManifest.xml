@@ -30,25 +30,27 @@
 
         <activity
             android:name=".activity.IndexActivity"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden">
-        </activity>
-        <activity
-            android:name=".base.CommonWebActivity"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".activity.MainActivity">
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".base.CommonWebActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activity.MainActivity" android:windowSoftInputMode="stateHidden|adjustPan"  android:exported="true">
+
+        </activity>
+        <activity android:name=".activity.ForgetActivity" android:windowSoftInputMode="stateHidden|adjustPan" />
 
 
         <!-- File provider -->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.cloudcreativity.intellijworker.provider"
+            android:authorities="com.cloudcreativity.cashiersystem.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -56,5 +58,18 @@
                 android:resource="@xml/filespath" />
         </provider>
 
+        <service
+            android:name=".service.ScanService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility"
+                />
+        </service>
     </application>
 </manifest>

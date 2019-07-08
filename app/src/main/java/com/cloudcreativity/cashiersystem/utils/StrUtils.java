@@ -88,6 +88,12 @@ public class StrUtils {
         return b.setScale(2,   BigDecimal.ROUND_HALF_UP).floatValue();
     }
 
+    //获取三位小数，四舍五入
+    public static float get3BitDecimal(float number){
+        BigDecimal b   =   new BigDecimal(number);
+        return b.setScale(3,   BigDecimal.ROUND_HALF_UP).floatValue();
+    }
+
     /**
      *
      * @param datetime 日期串

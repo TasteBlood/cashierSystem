@@ -17,7 +17,7 @@ public class SPUtils {
         String UID = "app_login_user_id";
         String TOKEN = "app_request_token";
         String USER = "app_login_user";
-        String IDCARD = "app_id_card";
+        String SHOP_ID = "shop_id";
     }
 
     private static SharedPreferences preferences;
@@ -66,11 +66,12 @@ public class SPUtils {
         return preferences.getString(Config.TOKEN,"");
     }
 
-    public int getUid() {
-        return preferences.getInt(Config.UID,0);
+    public String
+    getUid() {
+        return preferences.getString(Config.UID,"");
     }
 
-    public String getIdCard(){return preferences.getString(Config.IDCARD,"");}
+    public String getShopId(){return preferences.getString(Config.SHOP_ID,"");}
     public UserEntity getUser() {
         return new Gson().fromJson(preferences.getString(Config.USER,"{}"),UserEntity.class);
     }

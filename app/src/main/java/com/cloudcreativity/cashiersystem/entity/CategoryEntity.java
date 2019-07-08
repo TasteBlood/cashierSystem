@@ -4,8 +4,17 @@ import java.util.List;
 
 public class CategoryEntity {
     private String name;
-    private int id;
-    private List<CategoryEntity> child;
+    private String id;
+    private String categoryOneId;
+    private List<CategoryEntity> seconds;
+
+    public String getCategoryOneId() {
+        return categoryOneId;
+    }
+
+    public void setCategoryOneId(String categoryOneId) {
+        this.categoryOneId = categoryOneId;
+    }
 
     public String getName() {
         return name;
@@ -15,19 +24,19 @@ public class CategoryEntity {
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public List<CategoryEntity> getChild() {
-        return child;
+    public List<CategoryEntity> getSeconds() {
+        return seconds;
     }
 
-    public void setChild(List<CategoryEntity> child) {
-        this.child = child;
+    public void setSeconds(List<CategoryEntity> seconds) {
+        this.seconds = seconds;
     }
 }
