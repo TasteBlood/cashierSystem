@@ -27,18 +27,29 @@ public class BaseApp extends Application {
         this.activities.remove(activity);
     }
 
+    //业务数据
+    //当前查看的会员id
+    public static long CURRENT_MID = 0;
+    //当前查看的订单id
+    public static int CURRENT_OID = 0;
+
+    //登录时间
+    public static String LOGIN_TIME = "";
+    //下线时间
+    public static String LOGOUT_TIME = "";
+
     @Override
     public void onCreate() {
         super.onCreate();
         app = this;
 
         //进程杀死，清空登录信息
-        SPUtils spUtils = SPUtils.get();
-        spUtils.putBoolean(SPUtils.Config.IS_LOGIN, false);
-        spUtils.putString(SPUtils.Config.UID, "");
-        spUtils.putString(SPUtils.Config.TOKEN, null);
-        spUtils.putString(SPUtils.Config.USER, "{}");
-        spUtils.putString(SPUtils.Config.SHOP_ID, "");
+//        SPUtils spUtils = SPUtils.get();
+//        spUtils.putBoolean(SPUtils.Config.IS_LOGIN, false);
+//        spUtils.putString(SPUtils.Config.UID, "");
+//        spUtils.putString(SPUtils.Config.TOKEN, null);
+//        spUtils.putString(SPUtils.Config.USER, "{}");
+//        spUtils.putString(SPUtils.Config.SHOP_ID, "");
 
         FontUtils.changeFont(app, "simhei.ttf");
         //CrashHandler.getInstance().init(app);

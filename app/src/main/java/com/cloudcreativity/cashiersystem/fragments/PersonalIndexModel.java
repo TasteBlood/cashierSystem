@@ -8,6 +8,7 @@ import com.cloudcreativity.cashiersystem.base.BaseModel;
 import com.cloudcreativity.cashiersystem.databinding.FragmentPersonalIndexBinding;
 import com.cloudcreativity.cashiersystem.fragments.personal.ChangeMobileFragment;
 import com.cloudcreativity.cashiersystem.fragments.personal.ChangePwdFragment;
+import com.cloudcreativity.cashiersystem.fragments.personal.LogFragment;
 import com.cloudcreativity.cashiersystem.fragments.personal.PersonalFragment;
 import com.cloudcreativity.cashiersystem.utils.FGUtils;
 
@@ -30,5 +31,9 @@ public class PersonalIndexModel extends BaseModel<FragmentActivity, FragmentPers
     }
     void onChangeMobile() {
         FGUtils.replace(manager,R.id.framePersonal,new ChangeMobileFragment());
+    }
+
+    void onLog(){
+        FGUtils.replace(manager,R.id.framePersonal,new LogFragment());
     }
 }

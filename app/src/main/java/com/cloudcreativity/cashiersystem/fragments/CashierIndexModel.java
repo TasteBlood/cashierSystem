@@ -27,9 +27,7 @@ public class CashierIndexModel extends BaseModel<FragmentActivity, FragmentCashi
         cashierFragment = new CashierFragment();
         orderListFragment = new OrderIndexFragment();
         openOrderFragment = new OpenOrderFragment();
-        fragmentManager.beginTransaction()
-                .add(R.id.frameCashier,cashierFragment,"cashier")
-                .commit();
+        onDefault();
     }
 
 
@@ -49,6 +47,13 @@ public class CashierIndexModel extends BaseModel<FragmentActivity, FragmentCashi
                     .show(orderListFragment)
                     .commit();
         }
+//        orderListFragment = new OrderIndexFragment();
+//        fragmentManager.beginTransaction()
+//                    .hide(cashierFragment)
+//                    .hide(openOrderFragment)
+//                    .add(R.id.frameCashier,orderListFragment,"orderIndex")
+//                    .show(orderListFragment)
+//                    .commit();
     }
 
     void onOpen(){
@@ -76,8 +81,8 @@ public class CashierIndexModel extends BaseModel<FragmentActivity, FragmentCashi
     void onDefault() {
         if(fragmentManager.findFragmentByTag("cashier")!=null){
             fragmentManager.beginTransaction()
-                    .hide(openOrderFragment)
                     .hide(orderListFragment)
+                    .hide(openOrderFragment)
                     .show(cashierFragment)
                     .commit();
         }else{

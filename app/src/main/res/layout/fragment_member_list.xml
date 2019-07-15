@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="model"
@@ -166,7 +167,10 @@
                 android:layout_height="50dip"
                 android:padding="10dip"
                 android:textColorHint="@color/frame_gray_343"
-                android:hint="请输入关键词查询"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:text="@={model.key}"
+                android:hint="请输入手机号/会员ID查询"
                 android:background="@drawable/shape_input_yellow_bg"/>
             <Button
                 android:layout_width="wrap_content"
@@ -238,11 +242,18 @@
                         android:text="操作"/>
                 </LinearLayout>
                 <!--table content-->
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rcv_member_list"
-                    android:adapter="@{model.adapter}"
+                <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+                    android:id="@+id/refreshMember"
+                    app:tr_enable_loadmore="true"
+                    app:tr_head_height="50dip"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rcv_member_list"
+                        android:adapter="@{model.adapter}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>

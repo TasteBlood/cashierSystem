@@ -35,6 +35,7 @@ public class AddMemberUtils {
         window.getAttributes().gravity = Gravity.CENTER;
         int widthPixels = context.getResources().getDisplayMetrics().widthPixels;
         window.getAttributes().width = widthPixels/3;
+        SoftKeyboardUtils.notAutoFocus(window);
         dialog.show();
     }
 

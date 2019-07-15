@@ -7,6 +7,13 @@
         </shape>
     </item>
 
+    <item android:state_enabled="false" android:color="@color/white">
+        <shape>
+            <solid android:color="@color/gray_a1a1a1" />
+            <corners android:radius="3dip" />
+        </shape>
+    </item>
+
     <item android:color="#ffff654d">
         <shape>
             <solid android:color="@color/transparent" />

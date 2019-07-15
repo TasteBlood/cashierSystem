@@ -13,16 +13,21 @@ import com.cloudcreativity.cashiersystem.base.LazyFragment;
 import com.cloudcreativity.cashiersystem.databinding.FragmentMemberListBinding;
 import com.cloudcreativity.cashiersystem.model.MemberListModel;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 /**
  * 会员列表页
  * */
 public class MemberListFragment extends LazyFragment {
 
+    private FragmentMemberListBinding binding;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentMemberListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_list,container,false);
-        binding.setModel(new MemberListModel(context,binding));
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_list,container,false);
+        binding.setModel(new MemberListModel(context, binding,this));
         binding.getRoot().setClickable(true);
         return binding.getRoot();
     }
@@ -30,5 +35,24 @@ public class MemberListFragment extends LazyFragment {
     @Override
     public void initialLoadData() {
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(String msg){
+        if("refresh_member_list".equals(msg)){
+            binding.refreshMember.startRefresh();
+        }
     }
 }

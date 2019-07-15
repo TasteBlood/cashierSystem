@@ -8,11 +8,13 @@ import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.DatePicker;
 
 import com.cloudcreativity.cashiersystem.R;
+import com.cloudcreativity.cashiersystem.base.BaseApp;
 import com.cloudcreativity.cashiersystem.base.BaseBindingRecyclerViewAdapter;
 import com.cloudcreativity.cashiersystem.base.BaseDialogImpl;
 import com.cloudcreativity.cashiersystem.base.BaseModel;
@@ -125,13 +127,21 @@ public class PersonalModel extends BaseModel<FragmentActivity, FragmentPersonalB
             }
 
             @Override
-            protected void onBindItem(ItemLayoutPersonalLogBinding binding, LogEntity item, int position) {
+            protected void onBindItem(ItemLayoutPersonalLogBinding binding, final LogEntity item, int position) {
                 binding.setItem(item);
                 if (position % 2 == 1) {
                     binding.getRoot().setBackgroundColor(Color.parseColor("#f5efef"));
                 } else {
                     binding.getRoot().setBackgroundColor(Color.parseColor("#ffffff"));
                 }
+                binding.btnDetail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        BaseApp.LOGIN_TIME = item.getLoginTime();
+                        BaseApp.LOGOUT_TIME = item.getExitTime();
+                        EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_PERSONAL_LOG);
+                    }
+                });
             }
         };
         binding.refreshLogs.setOnRefreshListener(new RefreshListenerAdapter() {

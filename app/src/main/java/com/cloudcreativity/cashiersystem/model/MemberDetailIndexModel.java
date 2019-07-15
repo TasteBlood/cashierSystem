@@ -10,6 +10,7 @@ import com.cloudcreativity.cashiersystem.fragments.member.BalanceFragment;
 import com.cloudcreativity.cashiersystem.fragments.member.MemberDetailFragment;
 import com.cloudcreativity.cashiersystem.fragments.member.PayFragment;
 import com.cloudcreativity.cashiersystem.fragments.member.ScoreFragment;
+import com.cloudcreativity.cashiersystem.fragments.message.MessageDetailFragment;
 import com.cloudcreativity.cashiersystem.utils.FGUtils;
 
 public class MemberDetailIndexModel extends BaseModel<FragmentActivity, FragmentMemberDetailIndexBinding> {
@@ -25,18 +26,19 @@ public class MemberDetailIndexModel extends BaseModel<FragmentActivity, Fragment
 
 
     public void onDetail(){
-        FGUtils.replace(manager,R.id.frameMemberDetail,new MemberDetailFragment());
+        MemberDetailFragment fragment = new MemberDetailFragment();
+        FGUtils.replaceNoAnim(manager,R.id.frameMemberDetail,fragment);
     }
 
     public void onBalance(){
-        FGUtils.replace(manager,R.id.frameMemberDetail,new BalanceFragment());
+        FGUtils.replaceNoAnim(manager,R.id.frameMemberDetail,new BalanceFragment());
     }
 
     public void onScore(){
-        FGUtils.replace(manager,R.id.frameMemberDetail,new ScoreFragment());
+        FGUtils.replaceNoAnim(manager,R.id.frameMemberDetail,new ScoreFragment());
     }
 
     public void onPay(){
-        FGUtils.replace(manager,R.id.frameMemberDetail,new PayFragment());
+        FGUtils.replaceNoAnim(manager,R.id.frameMemberDetail,new PayFragment());
     }
 }

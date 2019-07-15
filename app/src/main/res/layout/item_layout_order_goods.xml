@@ -4,7 +4,7 @@
     <data>
         <variable
             name="item"
-            type="com.cloudcreativity.cashiersystem.entity.OrderItemEntity" />
+            type="com.cloudcreativity.cashiersystem.entity.OpenOrderGoodsEntity" />
     </data>
 
     <LinearLayout
@@ -18,14 +18,14 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dip"
-            android:text="@{item.name}"/>
+            android:text="@{item.goodsName}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dip"
-            android:text="@{String.valueOf(item.id)}"/>
+            android:text="@{String.valueOf(item.goodsId)}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
@@ -39,21 +39,21 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dip"
-            android:text="@{String.valueOf(item.price)}"/>
+            android:text="@{item.formatPrice()}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dip"
-            android:text="@{String.valueOf(item.num)}"/>
+            android:text="@{String.valueOf(item.amount)}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dip"
-            android:text="@{String.valueOf(item.money)}"/>
+            android:text="@{item.formatTotal()}"/>
         <FrameLayout
             android:layout_width="0dip"
             android:layout_height="wrap_content"

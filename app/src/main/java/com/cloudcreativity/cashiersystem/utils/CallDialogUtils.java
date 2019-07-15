@@ -21,14 +21,16 @@ public class CallDialogUtils {
     private Dialog dialog;
     public ObservableField<String> finalWeight = new ObservableField<>();
     public ObservableField<String> unit = new ObservableField<>();
+    public ObservableField<String> goodsName = new ObservableField<>();
     private SerialPortUtils serialPortUtils;
     private Handler handler;
     private byte[] mBuffer;
     private LayoutDialogCallBinding binding;
     private OnOkListener onOkListener;
-    public void show(Context context,OnOkListener onOkListener,String unit){
+    public void show(Context context,OnOkListener onOkListener,String unit,String name){
         this.onOkListener = onOkListener;
         this.unit.set(unit);
+        this.goodsName.set(name);
         serialPortUtils = new SerialPortUtils();
         handler = new Handler(context.getMainLooper());
         dialog = new Dialog(context, R.style.myProgressDialogStyle);
@@ -109,6 +111,8 @@ public class CallDialogUtils {
                         if(!TextUtils.isEmpty(weight)) {
                             float v = Float.parseFloat(weight);
                             float decimal = StrUtils.get3BitDecimal(v / 1000f);
+                            if(decimal<=0.0f)
+                                return;
                             finalWeight.set(String.valueOf(decimal));
                             binding.etWeight.setSelection(binding.etWeight.getText().length());
                         }

@@ -35,19 +35,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@{item.identity}"/>
+            android:text="@{item.formatType()}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@{item.level}"/>
+            android:text="@{item.formatLevel()}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@{String.valueOf(item.balance)}"/>
+            android:text="@{item.formatBalance()}"/>
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="wrap_content"

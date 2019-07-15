@@ -30,9 +30,10 @@
                     android:background="@null"
                     android:padding="5dip"
                     android:maxLines="1"
-                    android:imeOptions="actionNone"
+                    android:imeOptions="actionDone"
                     android:singleLine="true"
                     android:inputType="text"
+                    app:addTextChangedListener="@{model.myWatcher}"
                     android:hint="请输入商品ID或名称搜索"
                     android:text="@{model.key}"
                     android:layout_weight="1"/>

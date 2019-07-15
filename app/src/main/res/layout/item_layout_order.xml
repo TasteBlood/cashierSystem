@@ -16,28 +16,28 @@
             android:layout_weight="1.4"
             android:gravity="center"
             android:padding="10dip"
-            android:text="@{item.id}"/>
+            android:text="@{item.orderNo}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:gravity="center"
             android:padding="10dip"
-            android:text="@{String.valueOf(item.money)}"/>
+            android:text="@{item.formatMoney()}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="center"
             android:padding="10dip"
-            android:text="@{item.state==0?@string/state_paied:@string/state_unpaied}"/>
+            android:text="@{item.check==1?@string/state_paied:@string/state_unpaied}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:gravity="center"
             android:padding="10dip"
-            android:text="@{item.formatWay()}"/>
+            android:text="@{item.payName}"/>
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"

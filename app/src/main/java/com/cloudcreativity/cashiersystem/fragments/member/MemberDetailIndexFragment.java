@@ -13,6 +13,7 @@ import com.cloudcreativity.cashiersystem.base.LazyFragment;
 import com.cloudcreativity.cashiersystem.databinding.FragmentMemberDetailIndexBinding;
 import com.cloudcreativity.cashiersystem.model.MemberDetailIndexModel;
 import com.cloudcreativity.cashiersystem.utils.AppConfig;
+import com.cloudcreativity.cashiersystem.utils.LogUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -27,12 +28,14 @@ public class MemberDetailIndexFragment extends LazyFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+        LogUtils.e("xuxiwu","member detail index created");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        LogUtils.e("xuxiwu","member detail index destroyed");
     }
 
     @Subscribe

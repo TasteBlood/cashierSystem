@@ -8,6 +8,8 @@ import com.cloudcreativity.cashiersystem.utils.CallDialogUtils;
 import com.cloudcreativity.cashiersystem.utils.ToastUtils;
 import com.cloudcreativity.cashiersystem.utils.USBUtils;
 
+import java.io.UnsupportedEncodingException;
+
 public class SettingDefaultModel extends BaseModel<FragmentActivity, FragmentSettingDefaultBinding> {
 
     public SettingDefaultModel(FragmentActivity context, FragmentSettingDefaultBinding binding) {
@@ -19,7 +21,11 @@ public class SettingDefaultModel extends BaseModel<FragmentActivity, FragmentSet
     }
 
     public void onTestPrintClick(){
-
+        try {
+            USBUtils.getInstance(context).printTestPage();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onOpenCashBoxClick(){
@@ -32,6 +38,6 @@ public class SettingDefaultModel extends BaseModel<FragmentActivity, FragmentSet
             public void onOk(float number) {
                 ToastUtils.showShortToast(context,"这次称重是"+number+"kg");
             }
-        },"测试数据");
+        },"测试数据",null);
     }
 }

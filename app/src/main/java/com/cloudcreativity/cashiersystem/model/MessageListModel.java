@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.RadioGroup;
 
 import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.base.BaseBindingRecyclerViewAdapter;
@@ -38,7 +39,7 @@ public class MessageListModel extends BaseModel<FragmentActivity, FragmentMessag
     private Integer category;
     private Integer state;
 
-    public MessageListModel(FragmentActivity context, final FragmentMessageListBinding binding, BaseDialogImpl baseDialog) {
+    public MessageListModel(FragmentActivity context, final FragmentMessageListBinding binding, final BaseDialogImpl baseDialog) {
         super(context, binding);
         this.baseDialog = baseDialog;
         adapter = new BaseBindingRecyclerViewAdapter<MessageEntity, ItemLayoutMessageBinding>(context) {
@@ -48,7 +49,7 @@ public class MessageListModel extends BaseModel<FragmentActivity, FragmentMessag
             }
 
             @Override
-            protected void onBindItem(ItemLayoutMessageBinding binding, final MessageEntity item, int position) {
+            protected void onBindItem(ItemLayoutMessageBinding binding, final MessageEntity item, final int position) {
                 binding.setItem(item);
                 if(position%2==1){
                     binding.getRoot().setBackgroundColor(Color.parseColor("#f5efef"));
@@ -58,7 +59,22 @@ public class MessageListModel extends BaseModel<FragmentActivity, FragmentMessag
                 binding.btnInfo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        EventBus.getDefault().post(item);
+                        HttpUtils.getInstance().queryNews(item.getId())
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new DefaultObserver<String>(baseDialog,true) {
+                                    @Override
+                                    public void onSuccess(String t) {
+                                        EventBus.getDefault().post(item);
+                                        item.setType(1);
+                                        adapter.notifyItemChanged(position);
+                                    }
+
+                                    @Override
+                                    public void onFail(ExceptionReason msg) {
+
+                                    }
+                                });
                     }
                 });
             }
@@ -125,5 +141,28 @@ public class MessageListModel extends BaseModel<FragmentActivity, FragmentMessag
                         }
                     }
                 });
+    }
+
+    public void onCheckChange1(RadioGroup rg,int checkId){
+        if(checkId==R.id.rb_message_all){
+            category = null;
+        }else if(checkId==R.id.rb_message_notice){
+            category = 0;
+        }else if(checkId==R.id.rb_message_news){
+            category = 1;
+        }
+
+        binding.refreshMessage.startRefresh();
+    }
+
+    public void onCheckChange2(RadioGroup rg,int checkId){
+        if(checkId==R.id.rb_message_all1){
+            state = null;
+        }else if(checkId==R.id.rb_message_read){
+            state = 1;
+        }else if(checkId==R.id.rb_message_unread){
+            state = 2;
+        }
+        binding.refreshMessage.startRefresh();
     }
 }

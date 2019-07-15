@@ -11,20 +11,22 @@ import android.view.ViewGroup;
 import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.base.LazyFragment;
 import com.cloudcreativity.cashiersystem.databinding.FragmentMemberDetailBinding;
+import com.cloudcreativity.cashiersystem.databinding.FragmentMemberEditBinding;
 import com.cloudcreativity.cashiersystem.model.MemberDetailModel;
+import com.cloudcreativity.cashiersystem.model.MemberEditModel;
 
 /**
  * 会员详情页
  */
-public class MemberDetailFragment extends LazyFragment {
+public class MemberEditFragment extends LazyFragment {
 
-    private MemberDetailModel model;
+    private MemberEditModel model;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentMemberDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_detail,container,false);
-        model = new MemberDetailModel(context, binding, this);
+        FragmentMemberEditBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_edit,container,false);
+        model = new MemberEditModel(context, binding, this);
         binding.setModel(model);
         binding.getRoot().setClickable(true);
         return binding.getRoot();

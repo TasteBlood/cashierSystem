@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
@@ -18,12 +19,19 @@ import com.cloudcreativity.cashiersystem.utils.DefaultObserver;
 import com.cloudcreativity.cashiersystem.utils.HttpUtils;
 import com.cloudcreativity.cashiersystem.utils.LogUtils;
 import com.cloudcreativity.cashiersystem.utils.SPUtils;
+import com.cloudcreativity.cashiersystem.utils.ScanGunHelper;
+import com.cloudcreativity.cashiersystem.utils.SoftKeyboardUtils;
 import com.cloudcreativity.cashiersystem.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ScanGunHelper.OnScanSuccessListener {
 
     private MyBusinessReceiver receiver;
 
@@ -63,6 +71,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //LogUtils.e("xuxiwu",event.toString());
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - firstTime > 2000) {
                 ToastUtils.showShortToast(this, "再按一次退出");
@@ -99,12 +108,18 @@ public class MainActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(this.getCurrentFocus()!=null)
+            //LogUtils.e("xuxiwu","颖仓软键盘...");
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             handler.removeCallbacks(runnable);
         } else if (ev.getAction() == MotionEvent.ACTION_UP) {
             startAD();
+            //隐藏软键盘
+
         }
         return super.dispatchTouchEvent(ev);
     }
@@ -143,4 +158,42 @@ public class MainActivity extends BaseActivity {
                     });
         }
     };
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(!"Virtual".equals(event.getDevice().getName())){
+            LogUtils.e("xuxiwu",event.getDevice().toString());
+            ScanGunHelper.getInstance().analysisKeyEvent(event,this);
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public void onSuccess(String barcode) {
+        if(barcode!=null&&!TextUtils.isEmpty(barcode)){
+            if(barcode.length()==13){
+                //商品码
+                Map<String,String> data = new HashMap<>();
+                data.put("name","goodsCode");
+                data.put("code",barcode);
+                EventBus.getDefault().post(data);
+            }else{
+                //支付码
+                if(barcode.length()==18){
+                    //微信支付
+                    Map<String,String> data = new HashMap<>();
+                    data.put("name","payCode");
+                    data.put("code",barcode);
+                    EventBus.getDefault().post(data);
+                }else{
+                    //支付宝支付
+                    Map<String,String> data = new HashMap<>();
+                    data.put("name","payCode");
+                    data.put("code",barcode);
+                    EventBus.getDefault().post(data);
+                }
+            }
+        }
+    }
 }

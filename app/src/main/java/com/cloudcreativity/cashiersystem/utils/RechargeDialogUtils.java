@@ -3,25 +3,23 @@ package com.cloudcreativity.cashiersystem.utils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.databinding.DataBindingUtil;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewStub;
 import android.view.Window;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.EditText;
 
 import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.databinding.LayoutDialogRechargeBinding;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class RechargeDialogUtils {
+public class RechargeDialogUtils{
     private Dialog dialog;
-    private OnChooseListener chooseListener;
-    private RadioButton lastCheck = null;
-    public void show(Activity context,OnChooseListener onChooseListener){
-        this.chooseListener = onChooseListener;
+    private ViewStub stepOne;
+    private ViewStub stepTwo;
+    private ViewStub stepThree;
+    public void show(Activity context){
         dialog = new Dialog(context, R.style.myProgressDialogStyle);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
@@ -29,6 +27,7 @@ public class RechargeDialogUtils {
                 R.layout.layout_dialog_recharge,null,false);
         binding.setUtils(this);
         dialog.setContentView(binding.getRoot());
+        initStepOne(binding.getRoot());
         int width = context.getResources().getDisplayMetrics().widthPixels;
         Window window = dialog.getWindow();
         assert window != null;
@@ -37,61 +36,69 @@ public class RechargeDialogUtils {
         dialog.show();
     }
 
-    public void dismiss(){
-        if(dialog!=null)
-            dialog.dismiss();
-    }
+    private void initStepOne(final View content){
+        stepOne = content.findViewById(R.id.stepOne);
+        stepOne.inflate();
 
-    public void onOk(){
-        if(this.chooseListener!=null){
-            if(this.lastCheck!=null){
-                String s = this.lastCheck.getText().toString();
-                String reg = "(\\d)\\D$";
-                Pattern compile = Pattern.compile(reg);
-                Matcher matcher = compile.matcher(s);
-                if(matcher.find()){
-                    this.chooseListener.onChoose(Integer.parseInt(matcher.group(1)));
-                }
-
+        content.findViewById(R.id.btn_cancel_one).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
+        });
+        content.findViewById(R.id.btn_ok_one).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText et_money = content.findViewById(R.id.et_money);
+                String money = et_money.getText().toString();
+                if(TextUtils.isEmpty(money))
+                    return;
+                if(Integer.parseInt(money)<200)
+                    return;
+                stepOne.setVisibility(View.GONE);
+                SoftKeyboardUtils.hideSoftInput(et_money);
+                initStepTwo(content);
+            }
+        });
+    }
 
-        }
-        dismiss();
+    private void initStepTwo(final View content){
+        stepTwo = content.findViewById(R.id.stepTwo);
+        stepTwo.inflate();
+        content.findViewById(R.id.btn_money).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stepTwo.setVisibility(View.GONE);
+                dialog.dismiss();
+            }
+        });
+
+        content.findViewById(R.id.btn_mobile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stepTwo.setVisibility(View.GONE);
+                initStepThree(content);
+            }
+        });
+
+        content.findViewById(R.id.btn_cancel_two).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
     }
 
-    public interface OnChooseListener{
-        void onChoose(int money);
+    private void initStepThree(final View content){
+        stepThree = content.findViewById(R.id.stepThree);
+        stepThree.inflate();
+        content.findViewById(R.id.btn_cancel_three).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 
-    public void onClick(View v){
-        if(this.lastCheck!=null&&this.lastCheck.isChecked())
-            lastCheck.setChecked(false);
-        switch (v.getId()){
-            case R.id.rb_200:
-                lastCheck = (RadioButton) v;
-                break;
-            case R.id.rb_300:
-                lastCheck = (RadioButton) v;
-                break;
-            case R.id.rb_400:
-                lastCheck = (RadioButton) v;
-                break;
-            case R.id.rb_500:
-                lastCheck = (RadioButton) v;
-                break;
-            case R.id.rb_600:
-                lastCheck = (RadioButton) v;
-                break;
-            case R.id.rb_700:
-                lastCheck = (RadioButton) v;
-                break;
-            case R.id.rb_800:
-                lastCheck = (RadioButton) v;
-                break;
-            case R.id.rb_1000:
-                lastCheck = (RadioButton) v;
-                break;
-        }
-    }
 }

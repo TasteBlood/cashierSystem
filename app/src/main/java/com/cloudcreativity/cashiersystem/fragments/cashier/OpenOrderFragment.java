@@ -17,6 +17,9 @@ import com.cloudcreativity.cashiersystem.model.OpenOrderModel;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OpenOrderFragment extends LazyFragment {
 
     private OpenOrderModel model;
@@ -42,7 +45,7 @@ public class OpenOrderFragment extends LazyFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentOpenOrderBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_open_order, container, false);
-        model = new OpenOrderModel(context, binding);
+        model = new OpenOrderModel(context, binding,this);
         binding.setModel(model);
         model.initialize();
         binding.getRoot().setClickable(true);
@@ -58,5 +61,19 @@ public class OpenOrderFragment extends LazyFragment {
         model.pushGoods(goodsEntity);
     }
 
+
+    /**
+     * 所有的code相关的操作都必须这么做
+     * 1、 name: goodsCode code:xxxxxxxxx
+     * 2、 name: payCode code:xxxxxxxxx
+     */
+    @Subscribe
+    public void onEvent(Map<String,String> map){
+        //根据barCode查询商品
+        if("goodsCode".equals(map.get("name"))){
+            //获取code
+            model.queryGoods(map.get("code"));
+        }
+    }
 
 }

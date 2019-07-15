@@ -1,4 +1,4 @@
-package com.cloudcreativity.cashiersystem.fragments.cashier;
+package com.cloudcreativity.cashiersystem.fragments.personal;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -10,25 +10,21 @@ import android.view.ViewGroup;
 
 import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.base.LazyFragment;
-import com.cloudcreativity.cashiersystem.databinding.FragmentOrderDetailBinding;
-import com.cloudcreativity.cashiersystem.model.OrderDetailModel;
+import com.cloudcreativity.cashiersystem.databinding.FragmentLogBinding;
+import com.cloudcreativity.cashiersystem.model.LogModel;
 
-/**
- * 订单详情
- */
-public class OrderDetailFragment extends LazyFragment {
+public class LogFragment extends LazyFragment {
+    @Override
+    public void initialLoadData() {
+
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentOrderDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_detail,container,false);
-        binding.setModel(new OrderDetailModel(context,binding,this));
+        FragmentLogBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_log,container,false);
+        binding.setModel(new LogModel(context,binding,this));
         binding.getRoot().setClickable(true);
         return binding.getRoot();
-    }
-
-    @Override
-    public void initialLoadData() {
-
     }
 }

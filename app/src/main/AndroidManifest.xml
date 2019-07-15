@@ -1,10 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cloudcreativity.cashiersystem">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.cloudcreativity.cashiersystem"
+    android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".base.BaseApp"
@@ -13,7 +17,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/FullscreenTheme">
+        android:theme="@style/FullscreenTheme"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
 
         <!-- 配置Glide加载图片的关联module -->
@@ -58,18 +63,13 @@
                 android:resource="@xml/filespath" />
         </provider>
 
-        <service
-            android:name=".service.ScanService"
-            android:enabled="true"
+        <receiver android:name=".receiver.BootReceiver"
             android:exported="true"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
-            <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            android:enabled="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-            <meta-data
-                android:name="android.accessibilityservice"
-                android:resource="@xml/accessibility"
-                />
-        </service>
+        </receiver>
+
     </application>
 </manifest>

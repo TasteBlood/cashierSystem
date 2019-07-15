@@ -7,12 +7,63 @@ import com.cloudcreativity.cashiersystem.utils.StrUtils;
  */
 public class OpenOrderGoodsEntity {
 
-    private long gid;
-    private String name;
+    private long goodsId;
+    private String goodsName;
     private String unit;
+    private String categoryOneId;
     private int price;
-    private float number;
+    private float amount;
+    private int money;
     private float discount;
+    private String standards;
+
+    public String getStandards() {
+        return standards;
+    }
+
+    public long getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(long goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public void setAmount(float amount) {
+        this.amount = amount;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void setStandards(String standards) {
+        this.standards = standards;
+    }
+
+    public String getCategoryOneId() {
+        return categoryOneId;
+    }
+
+    public void setCategoryOneId(String categoryOneId) {
+        this.categoryOneId = categoryOneId;
+    }
 
     public String getUnit() {
         return unit;
@@ -22,21 +73,6 @@ public class OpenOrderGoodsEntity {
         this.unit = unit;
     }
 
-    public long getGid() {
-        return gid;
-    }
-
-    public void setGid(long gid) {
-        this.gid = gid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getPrice() {
         return price;
@@ -44,14 +80,6 @@ public class OpenOrderGoodsEntity {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public float getNumber() {
-        return number;
-    }
-
-    public void setNumber(float number) {
-        this.number = number;
     }
 
     public float getDiscount() {
@@ -67,6 +95,18 @@ public class OpenOrderGoodsEntity {
     }
 
     public String formatTotal(){
-        return "￥"+StrUtils.get2BitDecimal(this.price*this.number/100f);
+        if(this.discount==0){
+            return "￥"+StrUtils.get2BitDecimal(this.price*this.amount/100f);
+        }else{
+            return "￥"+StrUtils.get2BitDecimal(this.price*this.amount*this.discount/100f);
+        }
+    }
+
+    public void calculateMoney(){
+        if(this.discount==0){
+            this.money = Float.valueOf(this.price*this.amount).intValue();
+        }else{
+            this.money = Float.valueOf(this.price*this.amount*this.discount).intValue();
+        }
     }
 }

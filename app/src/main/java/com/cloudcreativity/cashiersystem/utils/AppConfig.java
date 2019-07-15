@@ -53,6 +53,17 @@ public class AppConfig {
         public static final String FRAGMENT_PERSONAL_DEFAULT = "fragment_personal_default";
         public static final String FRAGMENT_PERSONAL_CHANGE_MOBILE = "fragment_personal_change_mobile";
         public static final String FRAGMENT_MESSAGE_LIST = "fragment_message_list";
+        public static final String FRAGMENT_PERSONAL_LOG = "fragment_personal_log";
+    }
+
+    public interface  PAY_WAY{
+        int PAY_BALANCE = 1;
+        int PAY_MONEY = 2;
+        int PAY_WX = 3;
+        int PAY_ALI = 4;
+        int PAY_UN = 5;
+        int PAY_OTHER = 6;
+
     }
 
 }

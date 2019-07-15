@@ -49,6 +49,7 @@
                 android:text="类型："/>
             <RadioGroup
                 android:id="@+id/rg_type"
+                android:onCheckedChanged="@{(rb,id)->model.onCheckChange1(rb,id)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -98,6 +99,7 @@
                 android:text="状态："/>
             <RadioGroup
                 android:id="@+id/rg_state"
+                android:onCheckedChanged="@{(rb,id)->model.onCheckChange2(rb,id)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

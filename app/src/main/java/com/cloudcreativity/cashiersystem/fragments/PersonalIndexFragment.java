@@ -54,6 +54,8 @@ public class PersonalIndexFragment extends LazyFragment {
             indexModel.onChangePwd();
         }else if(AppConfig.FRAGMENT_NAMES.FRAGMENT_PERSONAL_CHANGE_MOBILE.equals(name)){
             indexModel.onChangeMobile();
+        }else if(AppConfig.FRAGMENT_NAMES.FRAGMENT_PERSONAL_LOG.equals(name)){
+            indexModel.onLog();
         }
     }
 }

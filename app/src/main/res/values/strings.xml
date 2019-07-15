@@ -8,4 +8,5 @@
     <string name="state_unpaied">未结算</string>
     <string name="accessibility_description">扫码枪服务</string>
     <string name="str_ok">确定</string>
+    <string name="str_empty" />
 </resources>

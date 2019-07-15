@@ -24,6 +24,7 @@ import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.databinding.LayoutProgressDialogBinding;
 import com.cloudcreativity.cashiersystem.utils.AuthDialogUtils;
 import com.cloudcreativity.cashiersystem.utils.LogUtils;
+import com.cloudcreativity.cashiersystem.utils.SystemUIUtils;
 import com.cloudcreativity.cashiersystem.utils.ToastUtils;
 
 import java.io.File;
@@ -57,6 +58,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
             throw new IllegalStateException("onCreate called multiple times");
         }
         disposableDestroy = new CompositeDisposable();
+
+        //隐藏系统按键
+        SystemUIUtils.setStickFullScreen(getWindow().getDecorView());
+
     }
 
     @Override
@@ -65,7 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
         //取消显示的Toast
         ToastUtils.cancelToast();
 
-        //销毁对话框，防止内存泄漏
+        //销毁对话框，防止内存泄漏cd sy
         if (progressDialog != null) {
             dismissProgress();
         }

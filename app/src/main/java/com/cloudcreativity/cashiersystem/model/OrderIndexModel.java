@@ -40,17 +40,23 @@ public class OrderIndexModel extends BaseModel<FragmentActivity, FragmentOrderIn
     }
 
     public void onDetail(){
-        if(manager.findFragmentByTag("orderDetail")!=null){
-            manager.beginTransaction()
-                    .show(orderDetailFragment)
-                    .hide(orderListFragment)
-                    .commit();
-        }else{
-            manager.beginTransaction()
-                    .hide(orderListFragment)
-                    .add(R.id.frameOrder,orderDetailFragment,"orderDetail")
-                    .show(orderDetailFragment)
-                    .commit();
-        }
+//        if(manager.findFragmentByTag("orderDetail")!=null){
+//            manager.beginTransaction()
+//                    .show(orderDetailFragment)
+//                    .hide(orderListFragment)
+//                    .commit();
+//        }else{
+//            manager.beginTransaction()
+//                    .hide(orderListFragment)
+//                    .add(R.id.frameOrder,orderDetailFragment,"orderDetail")
+//                    .show(orderDetailFragment)
+//                    .commit();
+//        }
+        orderDetailFragment = new OrderDetailFragment();
+        manager.beginTransaction()
+                .hide(orderListFragment)
+                .add(R.id.frameOrder,orderDetailFragment,"orderDerail")
+                .show(orderDetailFragment)
+                .commit();
     }
 }
