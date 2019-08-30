@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="item"
+            type="com.cloudcreativity.cashiersystem.entity.MemberPayEntity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dip"
+            android:text="@{item.createTime}"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dip"
+            android:text="@{item.shopName}"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@{item.orderNo}"
+            android:padding="10dip"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@{item.formatPayMoney()}"
+            android:padding="10dip"
+            android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="10dip"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn_detail"
+                android:layout_width="120dip"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:background="@drawable/selector_yellow_btn"
+                android:text="查看详情"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

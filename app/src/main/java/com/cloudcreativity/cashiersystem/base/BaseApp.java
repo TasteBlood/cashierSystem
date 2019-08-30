@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
+import com.cloudcreativity.cashiersystem.entity.MemberEntity;
 import com.cloudcreativity.cashiersystem.utils.CrashHandler;
 import com.cloudcreativity.cashiersystem.utils.FontUtils;
 import com.cloudcreativity.cashiersystem.utils.SPUtils;
@@ -29,7 +30,9 @@ public class BaseApp extends Application {
 
     //业务数据
     //当前查看的会员id
+    public static int AVATAR = 0;
     public static long CURRENT_MID = 0;
+    public static MemberEntity ENTITY = null;
     //当前查看的订单id
     public static int CURRENT_OID = 0;
 

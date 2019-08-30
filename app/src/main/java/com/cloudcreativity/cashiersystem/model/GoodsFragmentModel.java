@@ -91,7 +91,8 @@ public class GoodsFragmentModel extends BaseModel<Activity, FragmentGoodsBinding
                             binding.elvGoods.expandGroup(0);
 
                             //加载默认第一大类第一小类的数据
-                            twoId = categoryEntities.get(0).getSeconds().get(0).getId();
+                            if(categoryEntities.get(0).getSeconds()!=null)
+                                twoId = categoryEntities.get(0).getSeconds().get(0).getId();
                             binding.refreshGoods.startRefresh();
                         }
                     }
@@ -137,6 +138,8 @@ public class GoodsFragmentModel extends BaseModel<Activity, FragmentGoodsBinding
                     @Override
                     public void onClick(View v) {
                         //发送选择事件
+                        if(item.getComputerStock()<=0)
+                            return;
                         EventBus.getDefault().post(item);
                     }
                 });

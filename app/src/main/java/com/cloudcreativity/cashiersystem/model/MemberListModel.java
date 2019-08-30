@@ -53,7 +53,7 @@ public class MemberListModel extends BaseModel<FragmentActivity, FragmentMemberL
     private int pageNum = 1;
     private int pageSize = 20;
     public ObservableField<String> key = new ObservableField<>();
-    public MemberListModel(FragmentActivity context, final FragmentMemberListBinding binding, BaseDialogImpl baseDialog) {
+    public MemberListModel(FragmentActivity context, final FragmentMemberListBinding binding, final BaseDialogImpl baseDialog) {
         super(context, binding);
         this.baseDialog = baseDialog;
         binding.rcvMemberList.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
@@ -76,7 +76,7 @@ public class MemberListModel extends BaseModel<FragmentActivity, FragmentMemberL
                     @Override
                     public void onClick(View v) {
                         //点击充值
-                        new RechargeDialogUtils().show(MemberListModel.this.context);
+                        new RechargeDialogUtils(item,context,baseDialog).show(MemberListModel.this.context);
                     }
                 });
 
@@ -87,6 +87,7 @@ public class MemberListModel extends BaseModel<FragmentActivity, FragmentMemberL
                         BaseApp.CURRENT_MID = item.getId();
                         EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_EDIT);
 
+
                     }
                 });
 
@@ -95,6 +96,7 @@ public class MemberListModel extends BaseModel<FragmentActivity, FragmentMemberL
                     public void onClick(View v) {
                         //点击详情
                         BaseApp.CURRENT_MID = item.getId();
+                        BaseApp.ENTITY = item;
                         EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_DETAIL_INDEX);
                     }
                 });

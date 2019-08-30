@@ -7,7 +7,7 @@ public class OrderEntity {
     private String orderNo;
     private String amount;
     private int totalMoney;
-    private String discountMoney;
+    private int discountMoney;
     private String status;
     private String type;
     private String createTime;
@@ -51,11 +51,11 @@ public class OrderEntity {
         this.totalMoney = totalMoney;
     }
 
-    public String getDiscountMoney() {
+    public int getDiscountMoney() {
         return discountMoney;
     }
 
-    public void setDiscountMoney(String discountMoney) {
+    public void setDiscountMoney(int discountMoney) {
         this.discountMoney = discountMoney;
     }
 

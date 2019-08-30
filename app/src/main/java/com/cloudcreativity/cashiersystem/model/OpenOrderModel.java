@@ -74,9 +74,15 @@ public class OpenOrderModel extends BaseModel<FragmentActivity, FragmentOpenOrde
                             @Override
                             public void onOk(float number) {
                                 //设置数量
+                                if (item.getStock() < number) {
+                                    ToastUtils.showShortToast(context, "已超过库存");
+                                    return;
+                                }
                                 item.setAmount(number);
                                 adapter.notifyItemChanged(position);
+                                refreshState();
                                 calculateTotal();
+
                             }
                         }, item.getUnit(), item.getGoodsName());
                     }
@@ -118,14 +124,14 @@ public class OpenOrderModel extends BaseModel<FragmentActivity, FragmentOpenOrde
         calculateTotalFinal();
         List<OpenOrderGoodsEntity> entities = new ArrayList<>();
         float amount = 0;
-        for(OpenOrderGoodsEntity entity:adapter.getItems()){
+        for (OpenOrderGoodsEntity entity : adapter.getItems()) {
             amount += entity.getAmount();
             entities.add(entity);
         }
-        new OpenOrderFinalDialog(totalMoney,discountTotal,amount,member.get(),remark.get(),entities).show(context,baseDialog);
+        new OpenOrderFinalDialog(totalMoney, discountTotal, amount, member.get(), remark.get(), entities).show(context, baseDialog);
     }
 
-    public void onEditClick(){
+    public void onEditClick() {
         new InputDialogUtils().show(context, remark.get(), new InputDialogUtils.OnOkListener() {
             @Override
             public void onOk(String content) {
@@ -144,10 +150,10 @@ public class OpenOrderModel extends BaseModel<FragmentActivity, FragmentOpenOrde
             discountTotal += entity.getAmount() * entity.getPrice() * entity.getDiscount();
             entity.calculateMoney();
         }
-        binding.tvTotal.setText("￥" + StrUtils.get2BitDecimal(totalMoney/100f));
-        binding.tvDiscount.setText("折扣终价(-" + StrUtils.get2BitDecimal(discountTotal/100f) + ")");
+        binding.tvTotal.setText("￥" + StrUtils.get2BitDecimal(totalMoney / 100f));
+        binding.tvDiscount.setText("折扣终价(-" + StrUtils.get2BitDecimal(discountTotal / 100f) + ")");
         finalMoney = totalMoney - discountTotal;
-        binding.tvDiscountMoney.setText("￥" + (StrUtils.get2BitDecimal(finalMoney/100f)));
+        binding.tvDiscountMoney.setText("￥" + (StrUtils.get2BitDecimal(finalMoney / 100f)));
     }
 
     /**
@@ -158,6 +164,10 @@ public class OpenOrderModel extends BaseModel<FragmentActivity, FragmentOpenOrde
     public void pushGoods(final GoodsEntity goodsEntity) {
         for (int i = 0; i < adapter.getItems().size(); i++) {
             if (adapter.getItems().get(i).getGoodsId() == goodsEntity.getGoodsId()) {
+                if (adapter.getItems().get(i).getAmount() == adapter.getItems().get(i).getStock()) {
+                    ToastUtils.showShortToast(context, "已超过库存");
+                    return;
+                }
                 adapter.getItems().get(i).setAmount(adapter.getItems().get(i).getAmount() + 1);
                 calculateTotal();
                 adapter.notifyItemChanged(i);
@@ -171,6 +181,7 @@ public class OpenOrderModel extends BaseModel<FragmentActivity, FragmentOpenOrde
         entity.setDiscount(0);
         entity.setCategoryOneId(goodsEntity.getCategoryOneId());
         entity.setGoodsId(goodsEntity.getGoodsId());
+        entity.setStock(goodsEntity.getComputerStock());
         entity.setGoodsName(goodsEntity.getGoodsDomain().getName());
         entity.setAmount(1);
         entity.setStandards(goodsEntity.getGoodsDomain().getStandards());
@@ -215,10 +226,10 @@ public class OpenOrderModel extends BaseModel<FragmentActivity, FragmentOpenOrde
             totalMoney += entity.getAmount() * entity.getPrice();
             discountTotal += entity.getAmount() * entity.getPrice() * entity.getDiscount();
         }
-        binding.tvTotal.setText("￥" + StrUtils.get2BitDecimal(totalMoney/100f));
-        binding.tvDiscount.setText("折扣终价(-" + StrUtils.get2BitDecimal(discountTotal/100f) + ")");
+        binding.tvTotal.setText("￥" + StrUtils.get2BitDecimal(totalMoney / 100f));
+        binding.tvDiscount.setText("折扣终价(-" + StrUtils.get2BitDecimal(discountTotal / 100f) + ")");
         finalMoney = totalMoney - discountTotal;
-        binding.tvDiscountMoney.setText("￥" + (StrUtils.get2BitDecimal(finalMoney/100f)));
+        binding.tvDiscountMoney.setText("￥" + (StrUtils.get2BitDecimal(finalMoney / 100f)));
     }
 
     //根据barCode查询商品

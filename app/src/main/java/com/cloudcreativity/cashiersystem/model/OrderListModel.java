@@ -19,6 +19,7 @@ import com.cloudcreativity.cashiersystem.databinding.ItemLayoutOrderBinding;
 import com.cloudcreativity.cashiersystem.entity.OrderEntity;
 import com.cloudcreativity.cashiersystem.utils.AppConfig;
 import com.cloudcreativity.cashiersystem.utils.BaseResult;
+import com.cloudcreativity.cashiersystem.utils.DateChooseUtils;
 import com.cloudcreativity.cashiersystem.utils.DefaultObserver;
 import com.cloudcreativity.cashiersystem.utils.HttpUtils;
 import com.google.gson.Gson;
@@ -260,15 +261,15 @@ public class OrderListModel extends BaseModel<FragmentActivity, FragmentOrderLis
     }
 
     public void onTimeClick(){
-        Calendar instance = Calendar.getInstance(Locale.CHINA);
-        DatePickerDialog dialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+        DateChooseUtils utils = new DateChooseUtils(context, R.style.myProgressDialogStyle);
+        utils.show();
+        utils.setOnDateClickListener(new DateChooseUtils.OnDateClickListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                selectDate.set(year+"-"+formatZero(month+1)+"-"+formatZero(dayOfMonth));
+            public void onClick(int year, int month, int day) {
+                selectDate.set(year+"-"+formatZero(month+1)+"-"+formatZero(day));
                 binding.refreshOrder.startRefresh();
             }
-        }, instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH));
-        dialog.show();
+        });
 
     }
 

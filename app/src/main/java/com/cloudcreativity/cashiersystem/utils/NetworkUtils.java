@@ -16,7 +16,7 @@ public class NetworkUtils {
     public static boolean isAvailable(){
         ConnectivityManager manager = (ConnectivityManager) BaseApp.app.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = manager.getActiveNetworkInfo();
-        return null!=activeNetworkInfo&&activeNetworkInfo.isAvailable();
+        return null!=activeNetworkInfo&&activeNetworkInfo.isConnected();
 
     }
 }

@@ -16,6 +16,15 @@ public class OpenOrderGoodsEntity {
     private int money;
     private float discount;
     private String standards;
+    private int stock;
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 
     public String getStandards() {
         return standards;

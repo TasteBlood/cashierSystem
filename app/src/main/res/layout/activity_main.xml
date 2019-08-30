@@ -108,8 +108,10 @@
                     android:gravity="center_vertical"
                     android:layout_gravity="center_vertical|end">
                     <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="40dip"
-                        android:layout_height="40dip"
+                        android:id="@+id/iv_header"
+                        android:layout_width="50dip"
+                        android:layout_height="50dip"
+                        android:scaleType="fitXY"
                         android:src="@mipmap/img_header_portrait"/>
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_name"

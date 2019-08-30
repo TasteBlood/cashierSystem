@@ -92,4 +92,19 @@
         <item name="android:button">@null</item>
     </style>
 
+    <style name="CalendarTextStyleNormal">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/gray_717171</item>
+    </style>
+
+    <style name="CalendarWeekTextStyleNormal">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray_919191</item>
+    </style>
+
+    <style name="CalendarHeaderTextStyleNormal">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/gray_515151</item>
+    </style>
+
 </resources>

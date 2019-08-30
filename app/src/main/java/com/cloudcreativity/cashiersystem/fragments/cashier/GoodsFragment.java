@@ -13,16 +13,19 @@ import com.cloudcreativity.cashiersystem.base.LazyFragment;
 import com.cloudcreativity.cashiersystem.databinding.FragmentGoodsBinding;
 import com.cloudcreativity.cashiersystem.model.GoodsFragmentModel;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 /**
  * 商品fragment
  */
 public class GoodsFragment extends LazyFragment {
 
-
+    private FragmentGoodsBinding binding;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentGoodsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_goods,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_goods,container,false);
         binding.setModel(new GoodsFragmentModel(context,binding,this));
         binding.getRoot().setClickable(true);
         return binding.getRoot();
@@ -31,5 +34,24 @@ public class GoodsFragment extends LazyFragment {
     @Override
     public void initialLoadData() {
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(String msg){
+        if("refresh_goods_list".equals(msg)){
+            binding.refreshGoods.startRefresh();
+        }
     }
 }

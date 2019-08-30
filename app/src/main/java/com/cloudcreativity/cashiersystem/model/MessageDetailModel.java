@@ -18,6 +18,7 @@ import com.cloudcreativity.cashiersystem.databinding.FragmentMessageDetailBindin
 import com.cloudcreativity.cashiersystem.entity.MessageEntity;
 import com.cloudcreativity.cashiersystem.utils.AppConfig;
 import com.cloudcreativity.cashiersystem.utils.LogUtils;
+import com.cloudcreativity.cashiersystem.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -29,6 +30,10 @@ public class MessageDetailModel extends BaseModel<FragmentActivity, FragmentMess
     }
 
     public void showData(MessageEntity entity){
+        if(entity.getMessage()==null){
+            ToastUtils.showShortToast(context,"消息加载失败");
+            return;
+        }
         String data =
                 "<html lang=\"cn\">" +
                         "<head>" +

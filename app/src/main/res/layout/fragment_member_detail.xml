@@ -153,6 +153,7 @@
                         android:layout_marginTop="5dip"
                         android:layout_marginBottom="5dip"
                         android:layout_marginEnd="5dip"
+                        android:onClick="@{()->model.onBalanceClick()}"
                         android:text="查看详情"/>
                 </LinearLayout>
                 <LinearLayout
@@ -181,6 +182,7 @@
                         android:layout_marginTop="5dip"
                         android:layout_marginBottom="5dip"
                         android:layout_marginEnd="5dip"
+                        android:onClick="@{()->model.onScoreClick()}"
                         android:text="查看详情"/>
                 </LinearLayout>
                 <LinearLayout
@@ -443,6 +445,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/selector_yellow_btn"
                         android:layout_margin="5dip"
+                        android:onClick="@{()->model.onPayClick()}"
                         android:text="查看详情"/>
                 </LinearLayout>
 

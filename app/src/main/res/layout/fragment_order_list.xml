@@ -375,7 +375,7 @@
                 </LinearLayout>
                 <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
                     android:id="@+id/refreshOrder"
-                    app:tr_head_height="50dip"
+
                     app:tr_autoLoadMore="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">

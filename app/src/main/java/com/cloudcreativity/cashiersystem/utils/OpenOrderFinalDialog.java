@@ -18,6 +18,8 @@ import com.cloudcreativity.cashiersystem.entity.MemberEntity;
 import com.cloudcreativity.cashiersystem.entity.OpenOrderGoodsEntity;
 import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -214,6 +216,8 @@ public class OpenOrderFinalDialog {
                                 dialog.dismiss();
                             }
                         },500);
+                        //发消息更新商品列表
+                        EventBus.getDefault().post("refresh_goods_list");
                     }
 
                     @Override

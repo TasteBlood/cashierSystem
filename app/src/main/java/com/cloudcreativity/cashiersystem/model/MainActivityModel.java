@@ -7,6 +7,7 @@ import android.widget.RadioGroup;
 
 import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.activity.MainActivity;
+import com.cloudcreativity.cashiersystem.base.BaseApp;
 import com.cloudcreativity.cashiersystem.base.BaseModel;
 import com.cloudcreativity.cashiersystem.databinding.ActivityMainBinding;
 import com.cloudcreativity.cashiersystem.entity.UserEntity;
@@ -32,6 +33,8 @@ public class MainActivityModel extends BaseModel<MainActivity, ActivityMainBindi
     public ObservableField<String> userName = new ObservableField<>();
     public ObservableField<String> role = new ObservableField<>();
 
+
+
     public MainActivityModel(MainActivity context, ActivityMainBinding binding) {
         super(context, binding);
         manager = context.getSupportFragmentManager();
@@ -47,6 +50,9 @@ public class MainActivityModel extends BaseModel<MainActivity, ActivityMainBindi
         UserEntity user = SPUtils.get().getUser();
         userName.set(user.getName());
         role.set(user.getRole().getName());
+        int[] images = {R.mipmap.img_headsculpture1_default,R.mipmap.img_headsculpture2_default};
+        BaseApp.AVATAR = images[Math.random()>0.5?1:0];
+        binding.ivHeader.setImageResource(BaseApp.AVATAR);
     }
 
     public void onCheckChange(RadioGroup group,int checkId){

@@ -245,7 +245,7 @@
                 <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
                     android:id="@+id/refreshMember"
                     app:tr_enable_loadmore="true"
-                    app:tr_head_height="50dip"
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <android.support.v7.widget.RecyclerView

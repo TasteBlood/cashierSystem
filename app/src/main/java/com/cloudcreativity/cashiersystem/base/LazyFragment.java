@@ -88,7 +88,8 @@ public abstract class LazyFragment extends Fragment implements BaseDialogImpl{
         if(disposable==null){
             throw new IllegalStateException("AddUtilDestroy should be called between onCreate and onDestroy");
         }
-        disposableDestroy.add(disposable);
+        if(disposableDestroy!=null)
+            disposableDestroy.add(disposable);
         return true;
     }
 

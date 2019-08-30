@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.cloudcreativity.cashiersystem.entity.OpenOrderGoodsEntity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dip">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@{item.goodsName}" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@{String.valueOf(item.goodsId)}" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="@{item.unit}" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text="@{item.formatPrice()}" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="@{String.valueOf(item.discount)}" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_number"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text="@{String.valueOf(item.amount)}" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@{item.formatTotal()}" />
+    </LinearLayout>
+
+
+</layout>

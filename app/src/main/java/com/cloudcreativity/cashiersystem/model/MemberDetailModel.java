@@ -52,4 +52,16 @@ public class MemberDetailModel extends BaseModel<FragmentActivity, FragmentMembe
         BaseApp.CURRENT_MID = 0;
         member.set(null);
     }
+
+    public void onBalanceClick(){
+        EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_BALANCE);
+    }
+
+    public void onScoreClick(){
+        EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_SCORE);
+    }
+
+    public void onPayClick(){
+        EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_PAY);
+    }
 }

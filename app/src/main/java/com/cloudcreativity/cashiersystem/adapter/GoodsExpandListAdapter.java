@@ -23,12 +23,12 @@ public class GoodsExpandListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return entities.size();
+        return entities==null?0:entities.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return entities.get(groupPosition).getSeconds().size();
+        return entities.get(groupPosition).getSeconds()==null?0:entities.get(groupPosition).getSeconds().size();
     }
 
     @Override

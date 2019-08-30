@@ -25,7 +25,7 @@ public interface APIService {
     /**
      * 整体的接口配置
      */
-    String TEST_HOST = "http://192.168.31.51:8083/";
+    String TEST_HOST = "http://192.168.31.124:8083/";
     String ONLINE_HOST = "http://service.milidianshang.cn/";
     String HOST_APP = AppConfig.DEBUG ? TEST_HOST : ONLINE_HOST;
     String VERIFY_CODE = HOST_APP +"/basics/getCode";
@@ -90,13 +90,36 @@ public interface APIService {
                                   @Query("pageSize") int size,
                                   @Query("param") String param);
 
+    @GET("/basics/getRechargeLogByMemberId")
+    Observable<String> queryMemberLog(@Query("memberId") long mid,
+                                      @Query("pageNum") int page,
+                                      @Query("pageSize") int size);
+
+    @GET("/basics/getCashLog")
+    Observable<String> queryMemberPay(@Query("memberId") long mid,
+                                      @Query("pageNum") int page,
+                                      @Query("pageSize") int size);
+
+    @GET("/basics/getOrderByConsumeId")
+    Observable<String> queryMemberPayDetail(@Query("consumeId") int mid);
+
+
     @POST("/app/addMember")
     @FormUrlEncoded
     Observable<String> addMember(@Field("identity") Integer identity,
                                  @Field("mobile") String mobile);
 
+    @POST("/app/addRecharge")
+    @FormUrlEncoded
+    Observable<String> recharge(@Field("memberId") long mid,
+                                @Field("money") int money,
+                                @Field("payWayId") int payWay,
+                                @Field("mobile") String mobile);
+
     @GET("/app/findMember")
     Observable<String> queryMember(@Query("id") long mid);
+
+
 
     @POST("/app/editMember")
     @FormUrlEncoded
@@ -134,6 +157,35 @@ public interface APIService {
     @POST("/app/selectOrderDetail")
     @FormUrlEncoded
     Observable<String> queryOrder(@Field("orderId") int orderId);
+
+
+    @GET("/basics/getCashLog")
+    Observable<String> getCashLog(@Query("adminId") long adminId,
+                                  @Query("loginTime") String loginTime,
+                                  @Query("logoutTime") String logoutTime,
+                                  @Query("pageNum") int page,
+                                  @Query("pageSize") int size);
+
+    @GET("/basics/getAddMemberLog")
+    Observable<String> getCreateLog(@Query("adminId") long adminId,
+                                  @Query("loginTime") String loginTime,
+                                  @Query("logoutTime") String logoutTime,
+                                  @Query("pageNum") int page,
+                                  @Query("pageSize") int size);
+
+    @GET("/basics/getEditMemberLog")
+    Observable<String> getEditLog(@Query("adminId") long adminId,
+                                    @Query("loginTime") String loginTime,
+                                    @Query("logoutTime") String logoutTime,
+                                    @Query("pageNum") int page,
+                                    @Query("pageSize") int size);
+
+    @GET("/basics/getRechargeLog")
+    Observable<String> getRechargeLog(@Query("adminId") long adminId,
+                                  @Query("loginTime") String loginTime,
+                                  @Query("logoutTime") String logoutTime,
+                                  @Query("pageNum") int page,
+                                  @Query("pageSize") int size);
 
     @GET("/basics/getMaxVersion")
     Observable<String> getLastVersion();

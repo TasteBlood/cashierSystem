@@ -25,6 +25,7 @@ import com.cloudcreativity.cashiersystem.entity.UserEntity;
 import com.cloudcreativity.cashiersystem.receiver.MyBusinessReceiver;
 import com.cloudcreativity.cashiersystem.utils.AppConfig;
 import com.cloudcreativity.cashiersystem.utils.BaseResult;
+import com.cloudcreativity.cashiersystem.utils.DateChooseUtils;
 import com.cloudcreativity.cashiersystem.utils.DefaultObserver;
 import com.cloudcreativity.cashiersystem.utils.HttpUtils;
 import com.cloudcreativity.cashiersystem.utils.SPUtils;
@@ -71,6 +72,7 @@ public class PersonalModel extends BaseModel<FragmentActivity, FragmentPersonalB
         },500);
         Calendar instance = Calendar.getInstance(Locale.CHINA);
         selectDate.set(instance.get(Calendar.YEAR)+"-"+formatZero((instance.get(Calendar.MONTH)+1))+"-"+formatZero(instance.get(Calendar.DAY_OF_MONTH)));
+        binding.ivHeader.setImageResource(BaseApp.AVATAR);
     }
 
     public void onLogout() {
@@ -200,32 +202,20 @@ public class PersonalModel extends BaseModel<FragmentActivity, FragmentPersonalB
     }
 
     public void onDateClick(){
-        showDatePicker();
+        //showDatePicker();
+        DateChooseUtils utils = new DateChooseUtils(context, R.style.myProgressDialogStyle);
+        utils.show();
+        utils.setOnDateClickListener(new DateChooseUtils.OnDateClickListener() {
+            @Override
+            public void onClick(int year, int month, int day) {
+                selectDate.set(year+"-"+formatZero(month+1)+"-"+formatZero(day));
+            }
+        });
     }
 
     //搜索
     public void onSearchClick(){
         binding.refreshLogs.startRefresh();
-    }
-
-    private void showDatePicker() {
-        Calendar instance = Calendar.getInstance(Locale.CHINA);
-        DatePickerDialog dialog = new DatePickerDialog(context,new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                   selectDate.set(formatZero(year)+"-"+formatZero((month+1))+"-"+formatZero(dayOfMonth));
-            }
-        }, instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH));
-
-        instance.add(Calendar.DAY_OF_MONTH,1);
-        dialog.getDatePicker().setMaxDate(instance.getTimeInMillis());
-        Window window = dialog.getWindow();
-        int widthPixels = context.getResources().getDisplayMetrics().widthPixels;
-        assert window != null;
-        window.getAttributes().width = widthPixels;
-        window.getAttributes().height = widthPixels/2;
-
-        dialog.show();
     }
 
     private String formatZero(int a){
