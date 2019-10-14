@@ -58,7 +58,9 @@ public class MemberDetailModel extends BaseModel<FragmentActivity, FragmentMembe
     }
 
     public void onScoreClick(){
-        EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_SCORE);
+        //暂停
+
+        //EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_SCORE);
     }
 
     public void onPayClick(){

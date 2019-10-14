@@ -77,7 +77,7 @@ public abstract class DefaultObserver<T> implements Observer<T> {
                             onSuccess(object.getString("info"));
                         }
                     }
-                }else if(object.getInt("status")==2){
+                }else if(object.getInt("status")==100){
                     //用户权限出问题,账号在别处登录
                     //先清空用户数据
                     SPUtils.get().putBoolean(SPUtils.Config.IS_LOGIN,false);
