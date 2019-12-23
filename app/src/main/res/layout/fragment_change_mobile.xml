@@ -140,8 +140,10 @@
                         android:paddingTop="5dip"
                         android:paddingBottom="5dip"
                         android:text="@={model.code}"
-                        android:hint="请输入验证码" />
+                        android:hint="输入短信验证码" />
                     <Button
+                        android:id="@+id/btn_send"
+                        android:onClick="@{()->model.onSendClick()}"
                         android:layout_width="wrap_content"
                         android:layout_height="40dip"
                         android:background="@drawable/selector_yellow_btn"

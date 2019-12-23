@@ -14,6 +14,9 @@ import com.cloudcreativity.cashiersystem.databinding.FragmentCashierBinding;
 import com.cloudcreativity.cashiersystem.model.CashierModel;
 import com.cloudcreativity.cashiersystem.utils.LogUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 public class CashierFragment extends LazyFragment {
 
     private CashierModel cashierModel;
@@ -21,13 +24,15 @@ public class CashierFragment extends LazyFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.e("xuxiwu","cashierFg create");
+        EventBus.getDefault().register(this);
+        // LogUtils.e("xuxiwu","cashierFg create");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtils.e("xuxiwu","cashierFg destroy");
+        // LogUtils.e("xuxiwu","cashierFg destroy");
+        EventBus.getDefault().unregister(this);
     }
 
     @Nullable
@@ -43,5 +48,28 @@ public class CashierFragment extends LazyFragment {
 
     @Override
     public void initialLoadData() {
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        LogUtils.e("xuxiwu","cashier visible"+isVisibleToUser);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtils.e("xuxiwu","cashier resume");
+    }
+
+    @Subscribe
+    public void onEvent(String msg){
+        if("list_order_close".equals(msg)){
+            if(getUserVisibleHint()){
+                if(cashierModel!=null){
+                    cashierModel.changeFragment("goodsInCashier");
+                }
+            }
+        }
     }
 }

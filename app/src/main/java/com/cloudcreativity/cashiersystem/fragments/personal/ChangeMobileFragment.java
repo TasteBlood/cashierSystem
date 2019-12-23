@@ -12,8 +12,12 @@ import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.base.LazyFragment;
 import com.cloudcreativity.cashiersystem.databinding.FragmentChangeMobileBinding;
 import com.cloudcreativity.cashiersystem.model.ChangeMobileModel;
+import com.cloudcreativity.cashiersystem.utils.SPUtils;
 
 public class ChangeMobileFragment extends LazyFragment {
+
+    private ChangeMobileModel mobileModel;
+
     @Override
     public void initialLoadData() {
 
@@ -23,8 +27,19 @@ public class ChangeMobileFragment extends LazyFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentChangeMobileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_change_mobile,container,false);
-        binding.setModel(new ChangeMobileModel(context,binding,this));
+        binding.setModel(mobileModel = new ChangeMobileModel(context,binding,this));
         binding.getRoot().setClickable(true);
+
+        //
+        if(SPUtils.get().getSMSTime()>0 && mobileModel!=null){
+            mobileModel.startTimer(SPUtils.get().getSMSTime());
+        }
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mobileModel.stopTimer();
     }
 }

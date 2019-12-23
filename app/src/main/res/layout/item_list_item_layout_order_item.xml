@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="item"
+            type="com.cloudcreativity.cashiersystem.entity.OpenOrderGoodsEntity" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip">
+        <android.support.v7.widget.AppCompatTextView
+            android:text="@{item.goodsName}"
+            android:textSize="18sp"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatTextView
+            android:text="@{String.valueOf(item.goodsId)}"
+            android:textSize="18sp"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatTextView
+            android:text="@{item.unit}"
+            android:textSize="18sp"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatTextView
+            android:text="@{item.formatPrice()}"
+            android:textSize="18sp"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatTextView
+            android:text="@{item.formatDiscount()}"
+            android:textSize="18sp"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatTextView
+            android:text="@{String.valueOf(item.amount)}"
+            android:textSize="18sp"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatTextView
+            android:text="@{item.formatTotal()}"
+            android:textSize="18sp"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</layout>

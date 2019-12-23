@@ -4,11 +4,20 @@ public class UserEntity {
     private String id;
     private String name;
     private String mobile;
-    private int type;
     private String shopId;
+    private int type;
+    private Shop shopDomain;
     private String token;
     private String createTime;
     private Role role;
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
 
     public String getCreateTime() {
         return createTime;
@@ -50,12 +59,12 @@ public class UserEntity {
         this.type = type;
     }
 
-    public String getShopId() {
-        return shopId;
+    public Shop getShopDomain() {
+        return shopDomain;
     }
 
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
+    public void setShopDomain(Shop shopDomain) {
+        this.shopDomain = shopDomain;
     }
 
     public String getToken() {
@@ -110,6 +119,27 @@ public class UserEntity {
 
         public void setDescription(String description) {
             this.description = description;
+        }
+    }
+
+    public class Shop{
+        private Long id;
+        private String name;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
     }
 }

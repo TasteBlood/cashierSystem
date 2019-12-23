@@ -186,11 +186,6 @@ public class DownloadApkDialogUtils extends AsyncTask<String, Integer, String> {
                             intent.setDataAndType(Uri.fromFile((File) msg.obj), "application/vnd.android.package-archive");
                         }
                         activity.startActivity(intent);
-
-                        //直接关闭当前的app
-                        Intent broadcast1 = new Intent();
-                        broadcast1.setAction(MyBusinessReceiver.ACTION_EXIT_APP);
-                        activity.sendBroadcast(broadcast1);
                         break;
                 }
             }

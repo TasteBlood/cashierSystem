@@ -40,7 +40,8 @@ public abstract class DefaultObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        LogUtils.e(this.getClass().getName(), TextUtils.isEmpty(e.getMessage())?"出错啦":e.getMessage());
+        if(e!=null)
+            e.printStackTrace();
         impl.dismissProgress();
         if(e instanceof HttpException){
             impl.showRequestErrorMessage("网络异常");

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="20dip"
+    android:background="@color/colorPrimary"
+    android:layout_height="match_parent">
+    <com.cloudcreativity.cashiersystem.view.category.CategoryView
+        android:id="@+id/cat_view"
+        android:layout_width="760dip"
+        android:layout_height="800dip" />
+</LinearLayout>

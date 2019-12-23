@@ -19,11 +19,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:onClick="@{()->model.onBack()}"
                 android:orientation="horizontal">
                 <android.support.v7.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{()->model.onBack()}"
                     android:src="@mipmap/icon_back"/>
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"

@@ -32,6 +32,7 @@ public class MessageDetailModel extends BaseModel<FragmentActivity, FragmentMess
     public void showData(MessageEntity entity){
         if(entity.getMessage()==null){
             ToastUtils.showShortToast(context,"消息加载失败");
+            binding.wvContent.loadDataWithBaseURL(null,"消息加载失败","text/html","utf-8",null);
             return;
         }
         String data =

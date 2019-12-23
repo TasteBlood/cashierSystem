@@ -109,8 +109,8 @@ public class CallDialogUtils {
                     //LogUtils.e("xuxiwu","weight="+weight);
                     try{
                         if(!TextUtils.isEmpty(weight)) {
-                            float v = Float.parseFloat(weight);
-                            float decimal = StrUtils.get3BitDecimal(v / 1000f);
+                            double v = Float.parseFloat(weight);
+                            double decimal = StrUtils.get3BitDecimal(v / 1000f);
                             if(decimal<=0.0f)
                                 return;
                             finalWeight.set(String.valueOf(decimal));
@@ -126,6 +126,6 @@ public class CallDialogUtils {
     };
 
     public interface OnOkListener{
-            void onOk(float number);
+            void onOk(double number);
     }
 }

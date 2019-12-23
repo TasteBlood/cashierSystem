@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable
-            name="item"
-            type="com.cloudcreativity.cashiersystem.entity.GoodsEntity" />
-    </data>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dip"
-        android:gravity="center_vertical"
-        android:padding="10dip"
-        android:orientation="horizontal">
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.2"
-            android:gravity="center"
-            android:textColor="@color/frame_gray_343"
-            android:text="@{item.goodsDomain.name}"/>
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/frame_gray_343"
-            android:text="@{String.valueOf(item.goodsId)}"/>
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/frame_gray_343"
-            android:text="@{item.goodsDomain.standards}"/>
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:textColor="@color/frame_gray_343"
-            android:text="@{item.goodsDomain.unit}"/>
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/frame_gray_343"
-            android:text="@{String.valueOf(item.goodsDomain.formatPrice())}"/>
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/frame_gray_343"
-            android:text="@{String.valueOf(item.computerStock)}"/>
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/frame_gray_343"
-            android:text="@{item.goodsDomain.tab}"/>
-    </LinearLayout>
-</layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dip"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dip">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:textColor="@color/frame_gray_343" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_goodsId"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/frame_gray_343" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_standards"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/frame_gray_343" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_unit"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:textColor="@color/frame_gray_343" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_price"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/frame_gray_343" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_stock"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/frame_gray_343" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_tab"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/frame_gray_343" />
+</LinearLayout>

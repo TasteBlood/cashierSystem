@@ -39,6 +39,8 @@ public class AppConfig {
     public static  class FRAGMENT_NAMES{
         public static final String FRAGMENT_ORDER = "fragment_order";
         public static final String FRAGMENT_OPEN_ORDER = "fragment_open_order";
+        public static final String FRAGMENT_LIST_ORDER_IN_CASHIER = "fragment_list_order_in_cashier";
+        public static final String FRAGMENT_LIST_ORDER_IN_OPEN = "fragment_list_order_in_goods";
         public static final Object FRAGMENT_CASHIER = "fragment_cashier";
         public static final String FRAGMENT_ORDER_DETAIL = "fragment_order_detail";
         public static final String FRAGMENT_ORDER_LIST = "fragment_order_list";
@@ -59,6 +61,7 @@ public class AppConfig {
     public interface  PAY_WAY{
         int PAY_BALANCE = 1;
         int PAY_MONEY = 2;
+        int PAY_MOBILE = 3;
         int PAY_WX = 3;
         int PAY_ALI = 4;
         int PAY_UN = 5;

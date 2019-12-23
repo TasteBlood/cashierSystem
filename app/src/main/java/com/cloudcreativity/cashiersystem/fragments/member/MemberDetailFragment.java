@@ -18,13 +18,11 @@ import com.cloudcreativity.cashiersystem.model.MemberDetailModel;
  */
 public class MemberDetailFragment extends LazyFragment {
 
-    private MemberDetailModel model;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentMemberDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_detail,container,false);
-        model = new MemberDetailModel(context, binding, this);
+        MemberDetailModel model = new MemberDetailModel(context, binding, this);
         binding.setModel(model);
         binding.getRoot().setClickable(true);
         return binding.getRoot();

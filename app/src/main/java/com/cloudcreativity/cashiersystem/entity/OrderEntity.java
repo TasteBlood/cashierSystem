@@ -16,7 +16,6 @@ public class OrderEntity {
     private String updateTime;
     private int check;
     private String inStorage;
-    private String orderDetails;
     private String payName;
 
     public int getId() {
@@ -121,14 +120,6 @@ public class OrderEntity {
 
     public void setInStorage(String inStorage) {
         this.inStorage = inStorage;
-    }
-
-    public String getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(String orderDetails) {
-        this.orderDetails = orderDetails;
     }
 
     public String getPayName() {

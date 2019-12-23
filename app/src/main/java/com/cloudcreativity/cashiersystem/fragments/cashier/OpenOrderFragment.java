@@ -12,7 +12,9 @@ import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.base.LazyFragment;
 import com.cloudcreativity.cashiersystem.databinding.FragmentOpenOrderBinding;
 import com.cloudcreativity.cashiersystem.entity.GoodsEntity;
+import com.cloudcreativity.cashiersystem.entity.ListEntity;
 import com.cloudcreativity.cashiersystem.model.OpenOrderModel;
+import com.cloudcreativity.cashiersystem.utils.LogUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -61,6 +63,25 @@ public class OpenOrderFragment extends LazyFragment {
         model.pushGoods(goodsEntity);
     }
 
+    @Subscribe
+    public void onEvent(ListEntity entity){
+        LogUtils.e("xuxiwu","fill order once");
+        if(entity==null) return;
+        //开始填充数据
+        if(model!=null)
+            model.fillOrder(entity);
+    }
+
+    @Subscribe
+    public void onEvent(String msg){
+        if("list_order_close".equals(msg)){
+            if(getUserVisibleHint()){
+                if(model!=null){
+                    model.changeFragment("goodsInOpen");
+                }
+            }
+        }
+    }
 
     /**
      * 所有的code相关的操作都必须这么做
@@ -69,10 +90,14 @@ public class OpenOrderFragment extends LazyFragment {
      */
     @Subscribe
     public void onEvent(Map<String,String> map){
+        if(model==null)
+            return;
         //根据barCode查询商品
         if("goodsCode".equals(map.get("name"))){
             //获取code
             model.queryGoods(map.get("code"));
+        }else if("clear_order".equals(map.get("name"))){
+            model.clear();
         }
     }
 

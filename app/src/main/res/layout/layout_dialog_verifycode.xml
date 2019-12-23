@@ -33,6 +33,7 @@
                 android:onClick="@{()->utils.onRefresh()}"
                 android:src="@color/gray_d1d1d1"/>
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_code"
                 android:layout_marginTop="10dip"
                 android:layout_width="match_parent"
                 android:layout_height="40dip"

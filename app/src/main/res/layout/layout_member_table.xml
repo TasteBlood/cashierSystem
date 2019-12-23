@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="utils"
+            type="com.cloudcreativity.cashiersystem.utils.MemberTableUtils" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:padding="20dip"
+        android:orientation="vertical">
+        <com.cloudcreativity.cashiersystem.view.category.CategoryView
+            android:id="@+id/cat_view"
+            android:layout_width="780dip"
+            android:layout_height="800dip" />
+        <Button
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/selector_yellow_btn"
+            android:onClick="@{()->utils.onClose()}"
+            android:text="关闭"/>
+    </LinearLayout>
+</layout>

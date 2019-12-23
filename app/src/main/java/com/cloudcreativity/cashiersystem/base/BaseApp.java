@@ -8,6 +8,8 @@ import android.support.annotation.RequiresApi;
 import com.cloudcreativity.cashiersystem.entity.MemberEntity;
 import com.cloudcreativity.cashiersystem.utils.CrashHandler;
 import com.cloudcreativity.cashiersystem.utils.FontUtils;
+import com.cloudcreativity.cashiersystem.utils.MyDBHelper;
+import com.cloudcreativity.cashiersystem.utils.OrderDao;
 import com.cloudcreativity.cashiersystem.utils.SPUtils;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
@@ -57,6 +59,8 @@ public class BaseApp extends Application {
         FontUtils.changeFont(app, "simhei.ttf");
         //CrashHandler.getInstance().init(app);
         initRefreshLayout();
+        //init SQLite
+        OrderDao.getInstance(app);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)

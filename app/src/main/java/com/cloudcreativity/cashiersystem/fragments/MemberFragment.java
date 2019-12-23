@@ -48,6 +48,8 @@ public class MemberFragment extends LazyFragment {
 
     @Subscribe
     public void onEvent(String name){
+        if(memberModel==null)
+            return;
         if(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_DETAIL_INDEX.equals(name)){
             //切换到详情
             memberModel.onDetail();

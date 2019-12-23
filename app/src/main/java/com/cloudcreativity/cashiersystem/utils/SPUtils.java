@@ -14,6 +14,7 @@ public class SPUtils {
 
     public interface Config{
         String IS_LOGIN = "app_is_login";
+        String SMS_TIME = "app_sms_time";
         String UID = "app_login_user_id";
         String TOKEN = "app_request_token";
         String USER = "app_login_user";
@@ -74,5 +75,13 @@ public class SPUtils {
     public String getShopId(){return preferences.getString(Config.SHOP_ID,"");}
     public UserEntity getUser() {
         return new Gson().fromJson(preferences.getString(Config.USER,"{}"),UserEntity.class);
+    }
+
+    public void setSMSTime(long time){
+        preferences.edit().putLong(Config.SMS_TIME,time).apply();
+    }
+
+    public long getSMSTime(){
+        return preferences.getLong(Config.SMS_TIME,0);
     }
 }

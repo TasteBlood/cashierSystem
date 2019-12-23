@@ -14,22 +14,45 @@ public interface APIService {
     /**
      * 网络请求的配置
      */
-    long timeOut = 10;//网络超时
+    long timeOut = 20;//网络超时
     /**
      * 整体的接口配置
      */
-    String TEST_HOST = "http://192.168.31.124:8083/";
+    String TEST_HOST = "https://service.freshergo.com/";
+//    String TEST_HOST = "http://192.168.31.119:8083/";
     String ONLINE_HOST = "http://service.milidianshang.cn/";
     String HOST_APP = AppConfig.DEBUG ? TEST_HOST : ONLINE_HOST;
-    String VERIFY_CODE = HOST_APP +"/basics/getCode";
+    // String VERIFY_CODE = HOST_APP +"/basics/getCode";
 
     @GET("/app/getCategory")
     Observable<String> getCategory();
 
+    /**
+     * 发送短信验证码
+     * @param mobile 手机号
+     */
+    @POST("/basics/sendSms")
+    @FormUrlEncoded
+    Observable<String> sendSms(@Field("mobile") String mobile);
+
+    /**
+     * 检查短信验证码 是否可用
+     * @param mobile 手机号
+     * @param sms 短信验证码
+     */
+    @POST("/basics/unused")
+    @FormUrlEncoded
+    Observable<String> checkSms(@Field("mobile") String mobile,
+                                @Field("sms") String sms);
+
     @POST("/basics/login")
     @FormUrlEncoded
     Observable<String> login(@Field("mobile") String mobile,
-                             @Field("password") String password);
+                             @Field("password") String password,
+                             @Field("type") int type);
+
+    @GET("/basics/getImgCode")
+    Observable<String> getImageCode();
 
     @GET("/basics/logout")
     Observable<String> logout(@Query("adminId") String adminId);
@@ -69,6 +92,7 @@ public interface APIService {
                                     @Field("oldMobile") String oldPhone);
 
     @POST("/basics/forgetPwd")
+    @FormUrlEncoded
     Observable<String> forgetPwd(@Field("mobile") String mobile,
                                  @Field("msgCode") String code,
                                  @Field("password") String password);
@@ -93,8 +117,9 @@ public interface APIService {
                                       @Query("pageNum") int page,
                                       @Query("pageSize") int size);
 
-    @GET("/basics/getOrderByConsumeId")
-    Observable<String> queryMemberPayDetail(@Query("consumeId") int mid);
+    @POST("/app/findByConsume")
+    @FormUrlEncoded
+    Observable<String> queryMemberPayDetail(@Field("consumeId") int mid);
 
 
     @POST("/app/addMember")
@@ -102,12 +127,21 @@ public interface APIService {
     Observable<String> addMember(@Field("identity") Integer identity,
                                  @Field("mobile") String mobile);
 
+    /**
+     * 会员充值
+     * @param mid 会员id
+     * @param money 充值金额
+     * @param payWay 支付方式 现金 手机
+     * @param adminId 管理员id
+     */
     @POST("/app/addRecharge")
     @FormUrlEncoded
     Observable<String> recharge(@Field("memberId") long mid,
                                 @Field("money") int money,
                                 @Field("payWayId") int payWay,
-                                @Field("mobile") String mobile);
+                                @Field("mobile") String mobile,
+                                @Field("adminId") String adminId,
+                                @Field("authCode") String code);
 
     @GET("/app/findMember")
     Observable<String> queryMember(@Query("id") long mid);
@@ -132,7 +166,8 @@ public interface APIService {
                                    @Field("type") int type,
                                    @Field("zeroMoney") int zeroMoney,
                                    @Field("remark") String remark,
-                                   @Field("orderDetailDomains")String goods);
+                                   @Field("orderDetailDomains")String goods,
+                                   @Field("authCode") String authCode);
 
 //    @POST("/app/addOrder")
 //    @Headers("Content-type: application/json")
@@ -186,4 +221,37 @@ public interface APIService {
     @POST("/app/selectMemberIdByPhone")
     @FormUrlEncoded
     Observable<String> queryMemberByPhone(@Field("phoneNum") String phone);
+
+
+    @POST("/app/query")
+    @FormUrlEncoded
+    Observable<String> queryResult(@Field("orderNum") String orderNum,@Field("orderId")int oid);
+
+    @POST("/app/reverse")
+    @FormUrlEncoded
+    Observable<String> backOrder(@Field("orderNum") String orderNum);
+
+    @POST("/app/updateOrder")
+    @FormUrlEncoded
+    /**
+     * payId 3 wx
+     * payId 4 alipay
+     * payId 5 other
+     */
+    Observable<String> updateOrder(@Field("orderId") int orderId,@Field("payId") int payId);
+
+    /**
+     * @param id 充值单id
+     * 更新重置状态
+     */
+    @GET("/app/updateState")
+    Observable<String> updateRecharge(@Query("id") int id);
+
+    @FormUrlEncoded
+    @POST("/app/categoryTwoAmount")
+    Observable<String> getCate2Amout(@Field("categoryOneId") String categoryOneId,
+                                     @Field("memberId") long memberId);
+
+    @GET("/app/getAll")
+    Observable<String> downloadGoods(@Query("shopId") String shopId);
 }

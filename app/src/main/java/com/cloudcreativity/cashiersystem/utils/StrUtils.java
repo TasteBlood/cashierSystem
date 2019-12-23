@@ -83,15 +83,15 @@ public class StrUtils {
     }
 
     //获取两位小数，四舍五入
-    public static float get2BitDecimal(float number){
+    public static double get2BitDecimal(double number){
         BigDecimal b   =   new BigDecimal(number);
-        return b.setScale(2,   BigDecimal.ROUND_HALF_UP).floatValue();
+        return b.setScale(2,   BigDecimal.ROUND_HALF_EVEN).doubleValue();
     }
 
     //获取三位小数，四舍五入
-    public static float get3BitDecimal(float number){
+    public static double get3BitDecimal(double number){
         BigDecimal b   =   new BigDecimal(number);
-        return b.setScale(3,   BigDecimal.ROUND_HALF_UP).floatValue();
+        return b.setScale(3,   BigDecimal.ROUND_HALF_EVEN).doubleValue();
     }
 
     /**

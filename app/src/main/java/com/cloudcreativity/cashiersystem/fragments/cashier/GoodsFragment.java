@@ -22,11 +22,14 @@ import org.greenrobot.eventbus.Subscribe;
 public class GoodsFragment extends LazyFragment {
 
     private FragmentGoodsBinding binding;
+    private GoodsFragmentModel model;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_goods,container,false);
-        binding.setModel(new GoodsFragmentModel(context,binding,this));
+        model = new GoodsFragmentModel(context, binding, this);
+        binding.setModel(model);
         binding.getRoot().setClickable(true);
         return binding.getRoot();
     }
@@ -51,7 +54,9 @@ public class GoodsFragment extends LazyFragment {
     @Subscribe
     public void onEvent(String msg){
         if("refresh_goods_list".equals(msg)){
-            binding.refreshGoods.startRefresh();
+            if(model!=null){
+                model.refresh();
+            }
         }
     }
 }

@@ -9,4 +9,5 @@
     <string name="accessibility_description">扫码枪服务</string>
     <string name="str_ok">确定</string>
     <string name="str_empty" />
+    <string name="zero">0</string>
 </resources>

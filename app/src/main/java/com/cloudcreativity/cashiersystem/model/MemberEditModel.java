@@ -73,6 +73,9 @@ public class MemberEditModel extends BaseModel<FragmentActivity, FragmentMemberE
                     @Override
                     public void onSuccess(String t) {
                         ToastUtils.showShortToast(context,"修改成功");
+                        EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_LIST);
+                        BaseApp.CURRENT_MID = 0;
+                        member.set(null);
                         EventBus.getDefault().post("refresh_member_list");
                     }
 

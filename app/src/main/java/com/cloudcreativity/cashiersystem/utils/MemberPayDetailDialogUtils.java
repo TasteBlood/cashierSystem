@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Window;
@@ -77,10 +78,11 @@ public class MemberPayDetailDialogUtils {
                     @Override
                     public void onSuccess(String t) {
                         PayDetailEntity entity = new Gson().fromJson(t, PayDetailEntity.class);
-                        if(entity!=null&&entity.getId()>0){
+                        if(entity!=null&& !TextUtils.isEmpty(entity.getOrderId())){
                             payEntity.set(entity);
                             adapter.getItems().clear();
                             adapter.getItems().addAll(entity.getOrderDetails());
+                            adapter.notifyDataSetChanged();
                         }
                         binding.refreshRecharge.finishRefreshing();
                     }

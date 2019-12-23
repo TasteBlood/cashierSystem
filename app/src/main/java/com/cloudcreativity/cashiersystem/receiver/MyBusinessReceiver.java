@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi;
 
 import com.cloudcreativity.cashiersystem.activity.IndexActivity;
 import com.cloudcreativity.cashiersystem.base.BaseApp;
+import com.cloudcreativity.cashiersystem.utils.OrderDao;
 import com.cloudcreativity.cashiersystem.utils.SPUtils;
 
 /**
@@ -26,7 +27,7 @@ public class MyBusinessReceiver extends BroadcastReceiver {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
         if(intent==null)
             return;
         if(ACTION_RE_LOGIN.equals(intent.getAction())){
@@ -37,6 +38,15 @@ public class MyBusinessReceiver extends BroadcastReceiver {
             spUtils.putString(SPUtils.Config.TOKEN,null);
             spUtils.putString(SPUtils.Config.USER,"{}");
             spUtils.putString(SPUtils.Config.SHOP_ID,"");
+
+            //清空全部的挂单数据
+            new Thread(){
+                @Override
+                public void run() {
+                    OrderDao.getInstance(context).deleteAll();
+                }
+            }.start();
+
             //这一步是关闭程序
             BaseApp.app.destroyActivity();
 
@@ -56,6 +66,14 @@ public class MyBusinessReceiver extends BroadcastReceiver {
             spUtils.putString(SPUtils.Config.TOKEN,null);
             spUtils.putString(SPUtils.Config.USER,"{}");
             spUtils.putString(SPUtils.Config.SHOP_ID,"");
+
+            //清空全部的挂单数据
+            new Thread(){
+                @Override
+                public void run() {
+                    OrderDao.getInstance(context).deleteAll();
+                }
+            }.start();
 
             BaseApp.app.destroyActivity();
 

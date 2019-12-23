@@ -4,6 +4,8 @@ import android.text.TextUtils;
 
 import com.cloudcreativity.cashiersystem.utils.StrUtils;
 
+import java.util.List;
+
 public class MemberEntity {
     private long id;
     private String mobile;
@@ -30,6 +32,77 @@ public class MemberEntity {
     private String shopName;
     private String type;
     private long adminId;
+
+    private int maxPayMoney;
+    private int minPayMoney;
+    private int avgPayMoney;
+    private int monthAmount;
+    private int weekAmount;
+    private List<Category> categoryOneAmount;
+
+    public String formatMax(){
+        return "￥"+StrUtils.get2BitDecimal(maxPayMoney/100f);
+    }
+
+    public String formatMin(){
+        return "￥"+StrUtils.get2BitDecimal(minPayMoney/100f);
+    }
+
+    public String formatAvg(){
+        return "￥"+StrUtils.get2BitDecimal(avgPayMoney/100f);
+    }
+
+    public int getMaxPayMoney() {
+        return maxPayMoney;
+    }
+
+    public void setMaxPayMoney(int maxPayMoney) {
+        this.maxPayMoney = maxPayMoney;
+    }
+
+    public int getMinPayMoney() {
+        return minPayMoney;
+    }
+
+    public void setMinPayMoney(int minPayMoney) {
+        this.minPayMoney = minPayMoney;
+    }
+
+    public int getAvgPayMoney() {
+        return avgPayMoney;
+    }
+
+    public void setAvgPayMoney(int avgPayMoney) {
+        this.avgPayMoney = avgPayMoney;
+    }
+
+    public int getMonthAmount() {
+        return monthAmount;
+    }
+
+    public void setMonthAmount(int monthAmount) {
+        this.monthAmount = monthAmount;
+    }
+
+    public int getWeekAmount() {
+        return weekAmount;
+    }
+
+    public void setWeekAmount(int weekAmount) {
+        this.weekAmount = weekAmount;
+    }
+
+    public List<Category> getCategoryOneAmount() {
+        return categoryOneAmount;
+    }
+
+    public void setCategoryOneAmount(List<Category> categoryOneAmount) {
+        this.categoryOneAmount = categoryOneAmount;
+    }
+
+    public String formatScore(){
+        return TextUtils.isEmpty(this.score)?"0":String.valueOf(this.score);
+    }
 
     public long getId() {
         return id;
@@ -252,5 +325,44 @@ public class MemberEntity {
 
     public String formatBalance(){
         return TextUtils.isEmpty(this.balance)?"￥0.00":("￥"+StrUtils.get2BitDecimal(Float.parseFloat(this.balance)/100f));
+    }
+
+    public static class Category{
+        private int category;
+        private String categoryName;
+        private String categoryOneId;
+        private String color;
+
+        public String getColor() {
+            return color;
+        }
+
+        public void setColor(String color) {
+            this.color = color;
+        }
+
+        public int getCategory() {
+            return category;
+        }
+
+        public void setCategory(int category) {
+            this.category = category;
+        }
+
+        public String getCategoryName() {
+            return categoryName;
+        }
+
+        public void setCategoryName(String categoryName) {
+            this.categoryName = categoryName;
+        }
+
+        public String getCategoryOneId() {
+            return categoryOneId;
+        }
+
+        public void setCategoryOneId(String categoryOneId) {
+            this.categoryOneId = categoryOneId;
+        }
     }
 }

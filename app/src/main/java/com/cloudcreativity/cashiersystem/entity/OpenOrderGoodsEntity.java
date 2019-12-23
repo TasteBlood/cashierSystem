@@ -12,17 +12,27 @@ public class OpenOrderGoodsEntity {
     private String unit;
     private String categoryOneId;
     private int price;
-    private float amount;
+    private double amount;
     private int money;
-    private float discount;
+    private double discount;
     private String standards;
-    private int stock;
+    private double stock;
+    //business variable
+    private boolean isMem = false;
 
-    public int getStock() {
+    public boolean isMem() {
+        return isMem;
+    }
+
+    public void setMem(boolean mem) {
+        isMem = mem;
+    }
+
+    public double getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(double stock) {
         this.stock = stock;
     }
 
@@ -46,11 +56,11 @@ public class OpenOrderGoodsEntity {
         this.goodsName = goodsName;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -91,7 +101,7 @@ public class OpenOrderGoodsEntity {
         this.price = price;
     }
 
-    public float getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
@@ -104,18 +114,39 @@ public class OpenOrderGoodsEntity {
     }
 
     public String formatTotal(){
-        if(this.discount==0){
+        if(this.discount<=0){
             return "￥"+StrUtils.get2BitDecimal(this.price*this.amount/100f);
         }else{
-            return "￥"+StrUtils.get2BitDecimal(this.price*this.amount*this.discount/100f);
+            if(isMem){
+                return "￥"+StrUtils.get2BitDecimal(this.price*this.amount*this.discount/100f/100f);
+            }else{
+                return "￥"+StrUtils.get2BitDecimal(this.price*this.amount/100f);
+            }
+
+        }
+    }
+
+    public String formatDiscount(){
+        if(this.discount==0){
+            return "0";
+        }else{
+            if(this.isMem){
+                return String.valueOf(this.discount/100f);
+            }else{
+                return "0";
+            }
         }
     }
 
     public void calculateMoney(){
         if(this.discount==0){
-            this.money = Float.valueOf(this.price*this.amount).intValue();
+            this.money = Double.valueOf(this.price*this.amount).intValue();
         }else{
-            this.money = Float.valueOf(this.price*this.amount*this.discount).intValue();
+            if(this.isMem){
+                this.money = Double.valueOf(this.price*this.amount*this.discount/100f).intValue();
+            }else{
+                this.money = Double.valueOf(this.price*this.amount).intValue();
+            }
         }
     }
 }

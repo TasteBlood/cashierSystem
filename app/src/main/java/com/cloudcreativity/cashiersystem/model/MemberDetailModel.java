@@ -11,6 +11,7 @@ import com.cloudcreativity.cashiersystem.entity.MemberEntity;
 import com.cloudcreativity.cashiersystem.utils.AppConfig;
 import com.cloudcreativity.cashiersystem.utils.DefaultObserver;
 import com.cloudcreativity.cashiersystem.utils.HttpUtils;
+import com.cloudcreativity.cashiersystem.utils.MemberTableUtils;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,6 +39,7 @@ public class MemberDetailModel extends BaseModel<FragmentActivity, FragmentMembe
                     public void onSuccess(String t) {
                         MemberEntity entity = new Gson().fromJson(t, MemberEntity.class);
                         member.set(entity);
+                       // binding.catMember.setFirst(entity.getCategoryOneAmount());
                     }
 
                     @Override
@@ -57,9 +59,17 @@ public class MemberDetailModel extends BaseModel<FragmentActivity, FragmentMembe
         EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_BALANCE);
     }
 
+    public void onTableClick(){
+        if(member.get()==null) return;
+        MemberTableUtils tableUtils = new MemberTableUtils(context,
+                member.get().getCategoryOneAmount(),
+                member.get().getId(),
+                baseDialog);
+        tableUtils.show();
+    }
+
     public void onScoreClick(){
         //暂停
-
         //EventBus.getDefault().post(AppConfig.FRAGMENT_NAMES.FRAGMENT_MEMBER_SCORE);
     }
 

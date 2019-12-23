@@ -138,7 +138,7 @@ public class MainActivity extends BaseActivity implements ScanGunHelper.OnScanSu
             HttpUtils.getInstance().logout(SPUtils.get().getUid())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new DefaultObserver<String>(MainActivity.this, true) {
+                    .subscribe(new DefaultObserver<String>(MainActivity.this, false) {
                         @Override
                         public void onSuccess(String t) {
                             //首先清空所有的用户数据
@@ -171,6 +171,7 @@ public class MainActivity extends BaseActivity implements ScanGunHelper.OnScanSu
 
     @Override
     public void onSuccess(String barcode) {
+        LogUtils.e("scanCode",barcode);
         if(barcode!=null&&!TextUtils.isEmpty(barcode)){
             if(barcode.length()==13){
                 //商品码

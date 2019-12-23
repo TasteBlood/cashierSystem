@@ -10,7 +10,9 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
+import android.text.TextUtils;
 
+import com.cloudcreativity.cashiersystem.entity.MemberEntity;
 import com.cloudcreativity.cashiersystem.entity.OpenOrderGoodsEntity;
 import com.cloudcreativity.cashiersystem.receiver.USBConnectReceiver;
 
@@ -194,11 +196,12 @@ public class USBUtils {
         printText("商品");
         printLocation(20,1);
         printText("单价");
-        printLocation(105,1);
-        printText("数量");
-        printWordSpace(2);
-        printText("小计");
+        printLocation(85,1);
+        printText("单位");
         printWordSpace(3);
+        printText("数量");
+        printWordSpace(3);
+        printText("小计");
         printTextNewLine("-----------------------------------------------");
 
         List<OpenOrderGoodsEntity> goods = new ArrayList<>();
@@ -206,26 +209,31 @@ public class USBUtils {
         entity.setGoodsName("西红柿");
         entity.setPrice(10025);
         entity.setAmount(1);
+        entity.setUnit("斤");
         entity.calculateMoney();
         goods.add(entity);
         entity = new OpenOrderGoodsEntity();
         entity.setGoodsName("高原夏菜");
         entity.setPrice(2000);
         entity.setAmount(4);
+        entity.setUnit("斤");
         entity.calculateMoney();
         goods.add(entity);
         entity = new OpenOrderGoodsEntity();
         entity.setGoodsName("阿尔山矿泉水");
         entity.setPrice(200);
         entity.setAmount(10);
+        entity.setUnit("瓶");
         entity.calculateMoney();
         goods.add(entity);
         for(OpenOrderGoodsEntity en:goods){
+
             printTextNewLine(en.getGoodsName());
             printLocation(20, 1);
             printText(String.valueOf(StrUtils.get2BitDecimal(en.getPrice()/100f)));
-            printLocation(105, 1);
-            printWordSpace(2);
+            printLocation(95,1);
+            printText(en.getUnit());
+            printWordSpace(3);
             printText(String.valueOf(en.getAmount()));
             printWordSpace(3);
             printText(String.valueOf(StrUtils.get2BitDecimal(en.getMoney()/100f)));
@@ -233,7 +241,7 @@ public class USBUtils {
 
         printTextNewLine("-----------------------------------------------");
         printLocation(0);
-        printTextNewLine("备注：测试胡数据啊");
+        printTextNewLine("备注：测试数据");
         printLine(2);
 
         //切纸
@@ -244,9 +252,69 @@ public class USBUtils {
 
     }
 
-    public void printOrder(String shopName, String time, int totalMoney, int payMoney, int discountMoney,
-                           int zeroMoney, int integralMoney, List<OpenOrderGoodsEntity> goods) {
+    public void printOrder(String shopName, String orderNum, MemberEntity entity,String time,String cashier,int payId,int totalMoney, int payMoney, int discountMoney,
+                           int zeroMoney, int integralMoney, List<OpenOrderGoodsEntity> goods, String memo) throws UnsupportedEncodingException {
+        initPos();
+        bold(true);
+        comeChinese();
+        printLocation(1);
+        printText(shopName);
 
+        printLocation(0);
+        printTextNewLine("-----------------------------------------------");
+        bold(false);
+        printTextNewLine("订单号："+orderNum);
+        printTextNewLine("会员ID："+(entity==null?"无会员":entity.getId()));
+        printTextNewLine("订单状态：已结算");
+        printTextNewLine("订单日期："+time);
+        printTextNewLine("收银员："+cashier);
+
+        bold(true);
+        printTextNewLine("订单总价："+StrUtils.get2BitDecimal(totalMoney/100f));
+        printTextNewLine("商品折扣：-"+StrUtils.get2BitDecimal(discountMoney/100f));
+        printTextNewLine("会员折扣：-0.0");
+        printTextNewLine("积分抵扣：-"+StrUtils.get2BitDecimal(integralMoney/100f));
+        printTextNewLine("抹零：-"+StrUtils.get2BitDecimal(zeroMoney/100f));
+        printTextNewLine("实际付款："+StrUtils.get2BitDecimal(payMoney/100f));
+        String payName = "账户余额";
+        if(payId==2){
+            payName="现金";
+        }else if(payId==3){
+            payName="手机";
+        }
+        printTextNewLine("付款方式："+payName);
+        bold(false);
+        printLine(2);
+
+        printText("商品");
+        printLocation(20,1);
+        printText("单价");
+        printLocation(75,1);
+        printText("单位");
+        printWordSpace(3);
+        printText("数量");
+        printWordSpace(3);
+        printText("小计");
+        printTextNewLine("-----------------------------------------------");
+        for(OpenOrderGoodsEntity en:goods){
+            printTextNewLine(en.getGoodsName());
+            printLocation(20, 1);
+            printText(String.valueOf(StrUtils.get2BitDecimal(en.getPrice()/100f)));
+            printLocation(75,1);
+            printText(en.getUnit());
+            printWordSpace(3);
+            printText(String.valueOf(en.getAmount()));
+            printWordSpace(3);
+            printText(String.valueOf(StrUtils.get2BitDecimal(en.getMoney()/100f)));
+        }
+
+        printTextNewLine("-----------------------------------------------");
+        printLocation(0);
+        printTextNewLine("备注："+(TextUtils.isEmpty(memo)?"无":memo));
+        printLine(2);
+
+        //切纸
+        feedAndCut();
     }
 
     /**

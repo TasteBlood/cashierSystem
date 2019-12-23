@@ -6,18 +6,41 @@ public class GoodsEntity {
     private int id;
     private String categoryOneId;
     private String categoryTwoId;
-    private int computerStock;
+    private double computerStock;
     private long goodsId;
     private long shopId;
-    private int reallyStock;
-    private int differenceStock;
-    private int peopleLoss;
-    private int naturalLoss;
+    private double reallyStock;
+    private double differenceStock;
+    private double peopleLoss;
+    private double naturalLoss;
     private String remark;
     private String createTime;
     private String updateTime;
     private GoodsDomain goodsDomain;
     private String goodsName;
+    private int rate;
+
+    public GoodsEntity(){
+
+    }
+
+    public GoodsEntity(String categoryOneId, String categoryTwoId, double computerStock, long goodsId, GoodsDomain goodsDomain, String goodsName, int rate) {
+        this.categoryOneId = categoryOneId;
+        this.categoryTwoId = categoryTwoId;
+        this.computerStock = computerStock;
+        this.goodsId = goodsId;
+        this.goodsDomain = goodsDomain;
+        this.goodsName = goodsName;
+        this.rate = rate;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -47,7 +70,7 @@ public class GoodsEntity {
         this.computerStock = computerStock;
     }
 
-    public int getComputerStock() {
+    public double getComputerStock() {
         return computerStock;
     }
 
@@ -71,7 +94,7 @@ public class GoodsEntity {
         this.reallyStock = reallyStock;
     }
 
-    public int getReallyStock() {
+    public double getReallyStock() {
         return reallyStock;
     }
 
@@ -79,7 +102,7 @@ public class GoodsEntity {
         this.differenceStock = differenceStock;
     }
 
-    public int getDifferenceStock() {
+    public double getDifferenceStock() {
         return differenceStock;
     }
 
@@ -87,7 +110,7 @@ public class GoodsEntity {
         this.peopleLoss = peopleLoss;
     }
 
-    public int getPeopleLoss() {
+    public double getPeopleLoss() {
         return peopleLoss;
     }
 
@@ -95,7 +118,7 @@ public class GoodsEntity {
         this.naturalLoss = naturalLoss;
     }
 
-    public int getNaturalLoss() {
+    public double getNaturalLoss() {
         return naturalLoss;
     }
 
@@ -145,12 +168,12 @@ public class GoodsEntity {
      * @author bejson.com (i@bejson.com)
      * @website http://www.bejson.com/java2pojo/
      */
-    public class GoodsDomain {
+    public static class GoodsDomain {
 
         private long id;
         private String name;
-        private int categoryOneId;
-        private int categoryTwoId;
+        private String categoryOneId;
+        private String categoryTwoId;
         private String smallImg;
         private String bigImg;
         private String tab;
@@ -173,6 +196,22 @@ public class GoodsEntity {
         private String deleteState;
         private String barCode;
 
+        public GoodsDomain(){
+
+        }
+
+        public GoodsDomain(long id, String name, String categoryOneId, String categoryTwoId, String tab, String standards, String unit, int price, String barCode) {
+            this.id = id;
+            this.name = name;
+            this.categoryOneId = categoryOneId;
+            this.categoryTwoId = categoryTwoId;
+            this.tab = tab;
+            this.standards = standards;
+            this.unit = unit;
+            this.price = price;
+            this.barCode = barCode;
+        }
+
         public void setId(long id) {
             this.id = id;
         }
@@ -189,20 +228,20 @@ public class GoodsEntity {
             return name;
         }
 
-        public void setCategoryOneId(int categoryOneId) {
-            this.categoryOneId = categoryOneId;
-        }
-
-        public int getCategoryOneId() {
+        public String getCategoryOneId() {
             return categoryOneId;
         }
 
-        public void setCategoryTwoId(int categoryTwoId) {
-            this.categoryTwoId = categoryTwoId;
+        public void setCategoryOneId(String categoryOneId) {
+            this.categoryOneId = categoryOneId;
         }
 
-        public int getCategoryTwoId() {
+        public String getCategoryTwoId() {
             return categoryTwoId;
+        }
+
+        public void setCategoryTwoId(String categoryTwoId) {
+            this.categoryTwoId = categoryTwoId;
         }
 
         public void setSmallImg(String smallImg) {

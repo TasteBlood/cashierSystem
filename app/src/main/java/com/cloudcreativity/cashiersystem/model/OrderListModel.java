@@ -17,6 +17,7 @@ import com.cloudcreativity.cashiersystem.base.BaseModel;
 import com.cloudcreativity.cashiersystem.databinding.FragmentOrderListBinding;
 import com.cloudcreativity.cashiersystem.databinding.ItemLayoutOrderBinding;
 import com.cloudcreativity.cashiersystem.entity.OrderEntity;
+import com.cloudcreativity.cashiersystem.entity.OrderWrapper;
 import com.cloudcreativity.cashiersystem.utils.AppConfig;
 import com.cloudcreativity.cashiersystem.utils.BaseResult;
 import com.cloudcreativity.cashiersystem.utils.DateChooseUtils;
@@ -127,9 +128,7 @@ public class OrderListModel extends BaseModel<FragmentActivity, FragmentOrderLis
                 .subscribe(new DefaultObserver<String>(baseDialog,false) {
                     @Override
                     public void onSuccess(String t) {
-                        Type type = new TypeToken<BaseResult<OrderEntity>>() {
-                        }.getType();
-                        BaseResult<OrderEntity> result = new Gson().fromJson(t,type);
+                        OrderWrapper result = new Gson().fromJson(t, OrderWrapper.class);
                         if(result.getRecords()==null||result.getRecords().size()==0){
                             if(page==1){
                                 adapter.getItems().clear();

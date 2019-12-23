@@ -35,7 +35,7 @@ public class SettingDefaultModel extends BaseModel<FragmentActivity, FragmentSet
     public void onCallOpenClick(){
         new CallDialogUtils().show(context, new CallDialogUtils.OnOkListener() {
             @Override
-            public void onOk(float number) {
+            public void onOk(double number) {
                 ToastUtils.showShortToast(context,"这次称重是"+number+"kg");
             }
         },"测试数据",null);

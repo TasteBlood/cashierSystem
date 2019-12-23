@@ -1,7 +1,11 @@
 package com.cloudcreativity.cashiersystem.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,8 +13,10 @@ import android.widget.EditText;
 
 import com.cloudcreativity.cashiersystem.R;
 import com.cloudcreativity.cashiersystem.base.BaseActivity;
+import com.cloudcreativity.cashiersystem.base.BaseDialogImpl;
 import com.cloudcreativity.cashiersystem.entity.UserEntity;
 import com.cloudcreativity.cashiersystem.utils.DefaultObserver;
+import com.cloudcreativity.cashiersystem.utils.DownloadGoodsTask;
 import com.cloudcreativity.cashiersystem.utils.HttpUtils;
 import com.cloudcreativity.cashiersystem.utils.SPUtils;
 import com.cloudcreativity.cashiersystem.utils.StrUtils;
@@ -67,24 +73,14 @@ public class IndexActivity extends BaseActivity {
             return;
         }
 
-        HttpUtils.getInstance().login(mobile,pass)
+        HttpUtils.getInstance().login(mobile,pass,2)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DefaultObserver<String>(this,true) {
                     @Override
                     public void onSuccess(String t) {
                         UserEntity userEntity = new Gson().fromJson(t, UserEntity.class);
-                        if(userEntity!=null){
-                            SPUtils.get().putString(SPUtils.Config.USER,new Gson().toJson(userEntity));
-                            SPUtils.get().putString(SPUtils.Config.TOKEN,userEntity.getToken());
-                            SPUtils.get().putString(SPUtils.Config.UID,userEntity.getId());
-                            SPUtils.get().putBoolean(SPUtils.Config.IS_LOGIN,true);
-                            SPUtils.get().putString(SPUtils.Config.SHOP_ID,userEntity.getShopId());
-                            startActivity(new Intent(IndexActivity.this,MainActivity.class));
-                            finish();
-                        }else{
-                            ToastUtils.showShortToast(IndexActivity.this,"登录失败");
-                        }
+                        doLogin(userEntity);
                     }
 
                     @Override
@@ -92,5 +88,14 @@ public class IndexActivity extends BaseActivity {
 
                     }
                 });
+    }
+
+    private void doLogin(UserEntity userEntity) {
+        if(userEntity!=null){
+            // start get data service
+            new DownloadGoodsTask(userEntity,this,this).execute();
+        }else{
+            ToastUtils.showShortToast(IndexActivity.this,"登录失败");
+        }
     }
 }

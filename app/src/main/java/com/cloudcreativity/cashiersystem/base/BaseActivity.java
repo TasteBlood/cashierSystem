@@ -75,11 +75,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
             dismissProgress();
         }
 
-        if (disposableDestroy == null) {
-            throw new IllegalStateException(
-                    "onDestroy called multiple times or onCreate not called");
+        if (disposableDestroy != null) {
+            disposableDestroy.dispose();
         }
-        disposableDestroy.dispose();
         disposableDestroy = null;
     }
 
@@ -88,7 +86,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseDial
         if (disposable == null) {
             throw new IllegalStateException("AddUtilDestroy should be called between onCreate and onDestroy");
         }
-        disposableDestroy.add(disposable);
+        if(disposableDestroy!=null){
+            disposableDestroy.add(disposable);
+        }
         return true;
     }
 
